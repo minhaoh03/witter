@@ -11,7 +11,7 @@ PUB = 'public'
 FOL = 'followers'
 PRI = 'private'
 
-privacy_choices = (
+PRIVACY_CHOICES = (
     (PUB, 'public'),
     (FOL, 'followers'),
     (PRI, 'private')
@@ -63,7 +63,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank = True, null = True
     )
     birth_date = models.DateTimeField(
-        auto_now_add = True,
         blank = False, null = False,
     )
     date_created = models.DateTimeField(
@@ -76,7 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     privacy = models.CharField(
         max_length = 9,
-        choices = privacy_choices,
+        choices = PRIVACY_CHOICES,
         default = PUB
     )
     is_active = models.BooleanField(default = True)

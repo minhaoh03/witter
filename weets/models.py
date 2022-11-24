@@ -8,6 +8,16 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+PUB = 'public'
+FOL = 'followers'
+PRI = 'private'
+
+PRIVACY_CHOICES = (
+    (PUB, 'public'),
+    (FOL, 'followers'),
+    (PRI, 'private')
+)
+
 # Create your models here.
 class Weet(models.Model):
     id = models.AutoField(
@@ -34,16 +44,13 @@ class Weet(models.Model):
         on_delete = models.SET_NULL
     )
     privacy = models.CharField(
+        choices = PRIVACY_CHOICES,
+        default = PUB,
         max_length = 9
     )
     
     def save(self, *args, **kwargs):
-        if self.user.privacy == User.PUB:
-            self.privacy = User.PUB
-        elif self.user.privacy == User.FOL:
-            self.privacy = User.FOL
-        else:
-            self.privacy = User.PRI
+        self.privacy = self.user.privacy
         super().save(*args, **kwargs)
     
     class Meta:
