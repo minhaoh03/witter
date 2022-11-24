@@ -2,7 +2,10 @@
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin
 )
+
 
 PUB = 'public'
 FOL = 'followers'
@@ -14,8 +17,29 @@ privacy_choices = (
     (PRI, 'private')
 )
 
-# Create your models here.
-class User(AbstractBaseUser):
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password, username, birth_date, **extra_fields):
+        if not email:
+            return "You must have an email"
+        if not password:
+            return "You must have a password"
+        if not username:
+            return "You must have a username"
+        if not birth_date:
+            return "You must enter a birthdate"
+        email = self.normalize_email(email)
+        user = self.model(email = email, password = password, username = username, birth_date = birth_date, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+        
+    def create_superuser(self, email, password, username, **extra_fields):        
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        
+        return self.create_user(email, password, username, **extra_fields)
+        
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique = True,
         max_length=255,
@@ -27,9 +51,11 @@ class User(AbstractBaseUser):
         max_length = 30
     )
     first_name = models.CharField(
+        blank = False, null = False,
         max_length = 100
     )
     last_name = models.CharField(
+        blank = False, null = False,
         max_length = 100
     )
     bio = models.TextField(
@@ -53,13 +79,20 @@ class User(AbstractBaseUser):
         choices = privacy_choices,
         default = PUB
     )
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default = True)
+    is_staff = models.BooleanField(default = False)
+    is_superuser = models.BooleanField(default = False)
+    
+    objects = CustomUserManager()
     
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'birth_date']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'birth_date', 'email']
     
     # get_full_name?
+    
+    def __str__(self):
+        return self.username
     
     @property
     def last_login(self, username):

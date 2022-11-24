@@ -14,12 +14,12 @@ class Weet(models.Model):
         primary_key = True
     )
     text = models.TextField(
-        blank = True, null = True, 
+        blank = True, null = True,
         max_length = 300
     )
     image = models.ImageField(
+        blank = True, null = True,
         upload_to = 'images/', 
-        blank = True, null = True
     )
     timestamp = models.DateTimeField(
         auto_now_add = True
@@ -33,7 +33,8 @@ class Weet(models.Model):
         blank = True, null = True,
         on_delete = models.SET_NULL
     )
-    privacy = models.CharField(  
+    privacy = models.CharField(
+        max_length = 9
     )
     
     def save(self, *args, **kwargs):

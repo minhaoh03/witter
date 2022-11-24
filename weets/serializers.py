@@ -1,18 +1,18 @@
-from django.contrib.auth import User
-
 from rest_framework import serializers
+
+from .models import Weet, Digs, Comment
 
 class WeetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = 'Weet'
-        content = '__all__'
+        model = Weet
+        fields = '__all__'
 
 class DigsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = 'Digs'
-        content = '__all__'
+        model = Digs
+        fields = '__all__'
         
 class CommentSerializers(serializers.ModelSerializer):
     class Meta:
-        model = 'Comment'
-        content = '__all__'
+        model = Comment
+        fields = '__all__'
