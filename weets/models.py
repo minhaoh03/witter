@@ -27,6 +27,12 @@ class Weet(models.Model):
         blank = True, null = True,
         max_length = 300
     )
+    digs = models.ManyToManyField(
+        User, 
+        related_name = 'weet_user', 
+        blank = True, null = True,
+        through = 'Dig'
+    )
     image = models.ImageField(
         blank = True, null = True,
         upload_to = 'images/', 
@@ -52,11 +58,15 @@ class Weet(models.Model):
     def save(self, *args, **kwargs):
         self.privacy = self.user.privacy
         super().save(*args, **kwargs)
+        
+    @property
+    def get_likes(self):
+        return self.digs.count()
     
     class Meta:
         ordering = ['-id']
     
-class Digs(models.Model):
+class Dig(models.Model):
     id = models.AutoField(
         primary_key = True
     )
@@ -66,10 +76,12 @@ class Digs(models.Model):
     )
     weet = models.ForeignKey(
         'Weet',
+        blank = True, null = True,
         on_delete = models.CASCADE
     )
     comment = models.ForeignKey(
         'Comment',
+        blank = True, null = True,
         on_delete = models.CASCADE
     )
     timestamp = models.DateTimeField(
@@ -90,6 +102,7 @@ class Comment(models.Model):
     )
     image = models.ImageField(
         upload_to = 'commentimgs/',
+        blank = True, null = True
     )
     timestamp = models.DateTimeField(
         auto_now_add = True,

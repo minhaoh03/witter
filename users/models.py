@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length = 300,
         blank = True, null = True
     )
-    birth_date = models.DateTimeField(
+    birth_date = models.DateField(
         blank = False, null = False,
     )
     date_created = models.DateTimeField(
