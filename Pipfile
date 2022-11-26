@@ -8,6 +8,7 @@ django = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
 pillow = "*"
+whitenoise = "*"
 
 [dev-packages]
 
