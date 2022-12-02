@@ -8,12 +8,12 @@ import {WeetComponent} from './weets'
 
 const e = React.createElement
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 const homeHTML = document.getElementById('root')
 const home = ReactDOM.createRoot(homeHTML);
