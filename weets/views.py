@@ -16,6 +16,15 @@ class WeetViewSet(viewsets.ModelViewSet):
     queryset = Weet.objects.all()
     serializer_class = WeetSerializer
     
+    def create(self, request):
+        request.data.update({"user": request.user.id})
+        serializer = WeetSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=201)
+        return Response({'Something went wrong'}, 404)
+        
+    
 class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()
     serializer_class = DigSerializer
