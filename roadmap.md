@@ -2,6 +2,7 @@
 -------------------------------------------------------------------------------------------------------------------------------------------
 > "The best time to start was yesterday, the second best time is now"
 
+https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-app-model/
 
 ## Weets
     [] Privacy of weet
