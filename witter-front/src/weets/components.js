@@ -17,8 +17,9 @@ export function WeetComponent(props) {
     if (error) return <p>An error occurred</p>
     return (
         <div className="WeetComponent">
-          {weets.map(({ text, privacy, user }) => (
+          {weets.map(({ text, privacy, user }, index) => (
             <Weet
+              key = {index}
               text = {text}
               privacy = {privacy}
               user = {user}

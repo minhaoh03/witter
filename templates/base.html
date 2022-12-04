@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000"/>
-    {% include 'react/css.html' %}
+    {% comment %} {% include 'react/css.html' %} {% endcomment %}
     <style>
         
     </style>
@@ -16,10 +16,6 @@
     {% block content %}
     {% endblock content %}
 
-    {% include 'react/js.html' %}
-    <script>
-      var url = location.pathname;
-      console.log(url)
-    </script>
+    {% comment %} {% include 'react/js.html' %} {% endcomment %}
   </body>
 </html>

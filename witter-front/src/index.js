@@ -7,25 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { WeetComponent, CreateWeet } from './weets'
 
 const e = React.createElement
-
+var root = false
 if(document.getElementById('root')) {
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+  var root = ReactDOM.createRoot(document.getElementById('root'))
 }
 
-
-const homeHTML = document.getElementById('root')
-if(homeHTML) {
-  const home = ReactDOM.createRoot(homeHTML);
-  if (home) {
-    home.render(
-      e(WeetComponent, homeHTML.dataset)
-    )
-  }
+if(document.getElementById('root')) {
+  root.render(
+    e(WeetComponent, root.dataset)
+  );
 }
 
 const createHTML = document.getElementById('home')
