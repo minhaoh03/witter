@@ -6,6 +6,7 @@ from django.http import QueryDict
 # rest framework
 from rest_framework import serializers
 
+import json
 
 
 
@@ -17,9 +18,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     def create(self, **validated_data):
-        print('\n')
-        final_data = QueryDict.dict(QueryDict.copy(validated_data['data']))
-        final_data['password'] = make_password(validated_data['data']['password'])
-        final_data.pop('csrfmiddlewaretoken')
-        print(final_data)
+        data = validated_data['data']
+        if not isinstance(data, dict):
+            final_data = QueryDict.dict(QueryDict.copy(data))
+        else:
+            final_data = data
+        final_data['password'] = make_password(final_data['password'])
+        
+        # CSRF in default HTML form
+        if('csrfmiddlewaretoken' in final_data):
+            final_data.pop('csrfmiddlewaretoken')
+        
         return super(UserSerializer, self).create(final_data)

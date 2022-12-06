@@ -1,26 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+
+import React, { Suspense, lazy } from 'react';
+import { HashRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { ClimbingBoxLoader } from 'react-spinners'
+
+import { WeetComponent, CreateWeet } from './weets'
+import { CreateUser } from './users'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Hello World!
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Suspense fallback={<ClimbingBoxLoader/>}>
+        <NavLink to="/weet">
+          Create 
+        </NavLink>
+        <NavLink to="/">
+          Home
+        </NavLink>
+        <NavLink to="/register">
+          Register
+        </NavLink>
+        <Routes>
+          <Route path="/" element={<WeetComponent/>}/>
+          <Route path="/weet" element={<CreateWeet/>}/>
+          <Route path="/register" element={<CreateUser/>}/>
+        </Routes>
+      </Suspense>
+    </Router>
+  )
 }
 
 export default App;

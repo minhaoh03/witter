@@ -14,7 +14,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     
     def create(self, request):
-        print(request.data)
         serializer = UserSerializer(data = request.data)
 
         if serializer.is_valid():

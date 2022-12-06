@@ -16,6 +16,7 @@ export function CreateWeet(props) {
         axios.post(domain + 'weets/api/weets/', {
             text: textAreaVal,
             image: null,
+            user: user,
             privacy: 'public',
             parent: null
         })

@@ -67,7 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_created = models.DateTimeField(
         auto_now_add = True,
-        blank = False, null = False,
+        blank = True, null = True,
     )
     profile_picture = models.ImageField(
         null = True, blank = True,

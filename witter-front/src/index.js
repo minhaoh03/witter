@@ -10,25 +10,10 @@ const e = React.createElement
 var root = false
 if(document.getElementById('root')) {
   var root = ReactDOM.createRoot(document.getElementById('root'))
-}
-
-if(document.getElementById('root')) {
   root.render(
-    e(WeetComponent, root.dataset)
+    <App/>
   );
 }
-
-const createHTML = document.getElementById('home')
-if(createHTML) {
-  const create = ReactDOM.createRoot(createHTML);
-  if (create) {
-    create.render(
-      <CreateWeet/> 
-    )
-  }
-}
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
