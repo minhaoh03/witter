@@ -2,8 +2,6 @@ import axios from 'axios'
 import { Weet } from './detail'
 import React, { useState, useEffect } from 'react'
 
-import { NavLink } from 'react-router-dom'
-
 export function WeetComponent(props) {
   const [weets, setWeets] = useState([])
   const [error, setError] = useState(null)

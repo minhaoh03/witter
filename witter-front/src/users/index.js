@@ -1,5 +1,5 @@
 import {CreateUser} from './create'
-import LoginUser from './login'
+import {LoginUser} from './login'
 
 export {
     CreateUser,

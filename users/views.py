@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 # drf
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 # py
 from .models import User
@@ -35,7 +36,6 @@ class UserViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist:
             return None
 
-
 def get_csrf(request):
     response = JsonResponse({'detail': 'CSRF cookie set'})
     response['X-CSRFToken'] = get_token(request)
@@ -51,14 +51,17 @@ def login_view(request):
         return JsonResponse({'detail': 'Please provide username and password.'}, status=400)
 
     user = authenticate(username=username, password=password)
-
+    
     if user is None:
         return JsonResponse({'detail': 'Invalid credentials.'}, status=400)
 
+    if Token.objects.filter(user=user):
+        token = Token.objects.get(user=user)
+    else:
+        token = Token.objects.create(user=user)
+
     login(request, user)
-    return JsonResponse({'detail': 'Successfully logged in.'})
-
-
+    return JsonResponse({'detail': 'Successfully logged in.', 'Authentication' : 'Token ' + str(token)})
 
 def logout_view(request):
     if not request.user.is_authenticated:
@@ -66,17 +69,3 @@ def logout_view(request):
 
     logout(request)
     return JsonResponse({'detail': 'Successfully logged out.'})
-
-
-@ensure_csrf_cookie
-def session_view(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({'isAuthenticated': False})
-
-    return JsonResponse({'isAuthenticated': True})
-
-
-def currentuser_view(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({'isAuthenticated': False})
-    return JsonResponse({'username': request.user.username})

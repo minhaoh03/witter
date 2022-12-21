@@ -18,17 +18,15 @@ PRIVACY_CHOICES = (
 )
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, username, birth_date, **extra_fields):
+    def create_user(self, email, password, username, **extra_fields):
         if not email:
             return "You must have an email"
         if not password:
             return "You must have a password"
         if not username:
             return "You must have a username"
-        if not birth_date:
-            return "You must enter a birthdate"
         email = self.normalize_email(email)
-        user = User(email = email, password = password, username = username, birth_date = birth_date, **extra_fields)
+        user = User(email = email, password = password, username = username, **extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -66,7 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank = True, null = True,
     )
     date_joined = models.DateTimeField(
-        default = timezone.now()
+        default = timezone.now
     )
     last_login = models.DateTimeField(
         default = timezone.now
