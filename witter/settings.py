@@ -28,14 +28,28 @@ FRONTEND_DIR = BASE_DIR / "witter-front"
 SECRET_KEY = 'django-insecure-*!t&22ay922(a48!cd9i9o2mkbwoyp(qg%*zw5ub-10638uvga'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_ENV') == 'development'
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+]
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_ALLOW_ALL = True
+# Cookies
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
 
-CORS_ORIGIN_WHITELIST = ( 'http://localhost:3000', 'http://localhost:8080' )
-# Application definition
+# PROD ONLY
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +64,8 @@ INSTALLED_APPS = [
     'users',
     # EXTERNAL
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +166,11 @@ WHITENOISE_ROOT = FRONTEND_DIR / 'build' / 'root'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # DRF
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # )
+}

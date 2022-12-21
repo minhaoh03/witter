@@ -1,5 +1,6 @@
 # django utils
 from django.shortcuts import render
+from django.http import QueryDict
 
 # DRF
 from rest_framework import viewsets, permissions
@@ -17,13 +18,13 @@ class WeetViewSet(viewsets.ModelViewSet):
     serializer_class = WeetSerializer
     
     def create(self, request):
-        request.data.update({"user": request.user.id})
-        serializer = WeetSerializer(data=request.data)
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = WeetSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            serializer.save(user=request.user.id)
             return Response(serializer.data, status=201)
         return Response({'Something went wrong'}, 404)
-        
     
 class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()

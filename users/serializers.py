@@ -3,12 +3,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.http import QueryDict
 
+# jwt
+
 # rest framework
 from rest_framework import serializers
 
 import json
-
-
 
 User = get_user_model()
 

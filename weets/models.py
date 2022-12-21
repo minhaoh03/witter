@@ -30,7 +30,6 @@ class Weet(models.Model):
     digs = models.ManyToManyField(
         User, 
         related_name = 'weet_user', 
-        blank = True, null = True,
         through = 'Dig'
     )
     image = models.ImageField(

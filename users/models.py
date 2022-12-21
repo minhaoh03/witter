@@ -5,7 +5,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin
 )
-
+from django.utils import timezone
 
 PUB = 'public'
 FOL = 'followers'
@@ -28,7 +28,7 @@ class CustomUserManager(BaseUserManager):
         if not birth_date:
             return "You must enter a birthdate"
         email = self.normalize_email(email)
-        user = self.model(email = email, password = password, username = username, birth_date = birth_date, **extra_fields)
+        user = User(email = email, password = password, username = username, birth_date = birth_date, **extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -63,11 +63,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank = True, null = True
     )
     birth_date = models.DateField(
-        blank = False, null = False,
-    )
-    date_created = models.DateTimeField(
-        auto_now_add = True,
         blank = True, null = True,
+    )
+    date_joined = models.DateTimeField(
+        default = timezone.now()
+    )
+    last_login = models.DateTimeField(
+        default = timezone.now
     )
     profile_picture = models.ImageField(
         null = True, blank = True,
@@ -86,13 +88,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'birth_date', 'email']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
     
     # get_full_name?
     
     def __str__(self):
         return self.username
     
-    @property
-    def last_login(self, username):
-        return User.objects.get(username = username).last_login
+    # @property
+    # def last_login(self, username):
+    #     return User.objects.get(username = username).last_login

@@ -1,5 +1,8 @@
 # To Do List
 ------------
 
-[] Improve serializers
-[] Improve models?
+[] Make permanent URLs
+[] Remove Whitenoise
+[x] Fix Admin Bug / Create custom admin user
+# [] Finish Authentication
+[] Fix Weet Creation Bug

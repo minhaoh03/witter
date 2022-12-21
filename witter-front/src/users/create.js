@@ -10,7 +10,7 @@ export function CreateUser(props) {
     const bdayRef = React.createRef()
     const privRef = React.createRef()
 
-    const domain = 'http://localhost:8000/'
+    const domain = 'http://localhost:8000/' // Change
 
     const handleSubmit = (event) => {
         event.preventDefault()
