@@ -5,15 +5,14 @@ from django.http import QueryDict
 # DRF
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
 
 # py
 from .models import Weet, Dig, Comment
 from .serializers import WeetSerializer, DigSerializer, CommentSerializer
 
-def home_view(request, *args, **kwargs):
-    return render(request, "home.html")
-
 class WeetViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
     queryset = Weet.objects.all()
     serializer_class = WeetSerializer
     
@@ -22,7 +21,7 @@ class WeetViewSet(viewsets.ModelViewSet):
         data['user'] = request.user.id
         serializer = WeetSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user.id)
+            serializer.save(user=request.user)
             return Response(serializer.data, status=201)
         return Response({'Something went wrong'}, 404)
     

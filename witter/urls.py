@@ -23,8 +23,6 @@ from django.conf import settings
 from django.http import HttpResponse, StreamingHttpResponse
 from django.template import engines
 
-from weets.views import home_view
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('weets/', include('weets.urls')),

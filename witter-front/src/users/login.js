@@ -42,10 +42,10 @@ export function LoginUser(props) {
             withCredentials: true
         },
         )
-            .then((data) => {
+            .then((ret) => {
                 setUsername('')
                 setPassword('')
-                localStorage.setItem('token', data['Authentication'])
+                localStorage.setItem('token', ret.data.Authentication)
                 setLoggedIn(true)
             })
             .catch((err) => {

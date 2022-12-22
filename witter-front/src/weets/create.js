@@ -1,15 +1,25 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 export function CreateWeet(props) {
-    const user = props.user
+    const [csrf, setCSRF] = useState('')
     const textAreaRef = React.createRef()
     const domain = 'http://localhost:8000/'
-    
+
     let tokenAuth = localStorage.getItem('token')
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/users/auth/csrf/", {
+             withCredentials: true,
+        })
+            .then((res) => {
+                let csrfToken = res.headers.get("X-CSRFToken");
+                setCSRF(csrfToken)
+            })
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -17,23 +27,27 @@ export function CreateWeet(props) {
         axios.post(domain + 'weets/api/weets/', {
             text: textAreaVal,
             image: null,
-            user: user,
             privacy: 'public', //change
             parent: null
-        })
+        }, {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : tokenAuth,
+            "X-CSRFToken": csrf,
+        }})
         textAreaRef.current.value = ''
     }
-    
-    if(tokenAuth) {
-         return <div className = 'createWeet'>
-        <form onSubmit={handleSubmit}>
-            <textarea className='
-                        block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' 
-                        ref={textAreaRef} required={true} name='weet'>
-            </textarea>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type='submit'> Weet </button>
-        </form>
-    </div>
+
+    if (tokenAuth) {
+        return <div className='createWeet'>
+            <form onSubmit={handleSubmit}>
+                <textarea className='
+                        block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    ref={textAreaRef} required={true} name='weet'>
+                </textarea>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type='submit'> Weet </button>
+            </form>
+        </div>
     }
-   
+
 }
