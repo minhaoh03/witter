@@ -1,33 +1,8 @@
-import axios from 'axios'
-import { Weet } from './detail'
-import React, { useState, useEffect } from 'react'
+import { useState } from "react"
+import { CreateWeet } from "./create"
+import { WeetList } from "./list"
 
-export function WeetComponent(props) {
-  const [weets, setWeets] = useState([])
-  const [error, setError] = useState(null)
-  const domain = 'http://localhost:8000/'
-  useEffect(() => {
-    axios(domain + 'weets/api/weets')
-      .then((response) => {
-        setWeets(response.data)
-        setError(null)
-      })
-      .catch(setError)
-  }, [])
-  if (error) return <p>An error occurred</p>
-  return (
-    <div className="WeetComponent">
-      {weets.map(({ text, privacy, user }, index) => (
-        <Weet
-          key={index}
-          text={text}
-          privacy={privacy}
-          user={user}
-        />
-      ))}
-    </div>
-
-  );
+export function WeetFeed() {
+    const [reload, setReload] = useState(false)
+    return <> <CreateWeet create = {setReload} created = {reload} /><WeetList created = {reload}/> </>
 }
-
-

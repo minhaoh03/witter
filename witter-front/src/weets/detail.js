@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 
 export function Weet(props) {
     const {text, privacy, user} = props

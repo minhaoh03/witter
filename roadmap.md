@@ -51,3 +51,15 @@ https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-
 ## Customization
     [] Theme
     [] Font?
+
+# Roadmap (Frontend)
+
+## UI
+    [] Customize
+
+## Pages
+    [] Profile
+    [] Weet Page
+
+## Implementation
+    [] Privacy

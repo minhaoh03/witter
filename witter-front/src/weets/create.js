@@ -1,16 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
+import { useNavigate } from 'react-router-dom';
 
 export function CreateWeet(props) {
     const [csrf, setCSRF] = useState('')
+
     const textAreaRef = React.createRef()
     const domain = 'http://localhost:8000/'
+    const navigate = useNavigate()
 
+    // Token Auth Variable
     let tokenAuth = localStorage.getItem('token')
 
+    // CSRF getter
     useEffect(() => {
         axios.get("http://localhost:8000/users/auth/csrf/", {
              withCredentials: true,
@@ -21,24 +23,37 @@ export function CreateWeet(props) {
             })
     }, []);
 
-    const handleSubmit = (event) => {
+    // Non logged in user
+    useEffect(() => {
+        if (tokenAuth === 'null') {
+            return navigate('/login')
+        }
+    })
+
+    // Creating new weet submission
+    const handleSubmit = async (event) => {
         event.preventDefault()
         var textAreaVal = textAreaRef.current.value
-        axios.post(domain + 'weets/api/weets/', {
-            text: textAreaVal,
-            image: null,
-            privacy: 'public', //change
-            parent: null
-        }, {
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : tokenAuth,
-            "X-CSRFToken": csrf,
-        }})
+        try {
+            await axios.post(domain + 'weets/api/weets/', {
+                text: textAreaVal,
+                image: null,
+                privacy: 'public', //change
+                parent: null
+            }, {
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : tokenAuth,
+                "X-CSRFToken": csrf,
+            }})
+        } finally {
+            props.create(created => !created)
+        }
         textAreaRef.current.value = ''
     }
-
-    if (tokenAuth) {
+    
+    // Return
+    if (tokenAuth !== 'null') {
         return <div className='createWeet'>
             <form onSubmit={handleSubmit}>
                 <textarea className='
@@ -49,5 +64,4 @@ export function CreateWeet(props) {
             </form>
         </div>
     }
-
 }

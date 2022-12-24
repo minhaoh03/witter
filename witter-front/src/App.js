@@ -2,18 +2,18 @@ import React from 'react'
 import './App.css';
 import { createBrowserRouter as Router, RouterProvider} from 'react-router-dom';
 
-import { WeetComponent, CreateWeet } from './weets'
-import { CreateUser, LoginUser } from './users'
+import { WeetList, CreateWeet, WeetFeed } from './weets'
+import { CreateUser, LoginUser, LogoutUser } from './users'
 
 
 const router = Router([
   {
     path: "/",
-    element: <WeetComponent/>,
+    element: <WeetList/>,
   },
   {
     path: "weet",
-    element: <CreateWeet/>,
+    element: <WeetFeed/>,
   },
   {
     path: "register",
@@ -22,6 +22,10 @@ const router = Router([
   {
     path: "login",
     element: <LoginUser/>,
+  },
+  {
+    path: "logout",
+    element: <LogoutUser />
   },
 ]);
 
