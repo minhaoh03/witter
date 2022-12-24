@@ -1,7 +1,7 @@
 # To Do List
 ------------
 
-## [] Live tweets?
+## [x] Live tweets?
 
 [] Make the tweet show the user
 [] Set APIs private specifically weets
