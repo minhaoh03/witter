@@ -13,13 +13,13 @@ export function WeetList(props) {
     axios.get(domain + 'weets/api/weets/')
       .then((res) => {
         console.log(res.data)
+        console.log(res.data[0].user)
         setWeets(res.data)
         setError(null)
       })
       .catch((err) => {
         console.log(err)
       })
-    console.log(props.created)
   }, [reload, props.created])
 
   const handleReload = (event) => {
@@ -30,16 +30,19 @@ export function WeetList(props) {
   if (error) return <p>An error occurred</p>
 
   return (
-    <div className="WeetContainer">
+    <div className="bg-gray-300 font-fira flex flex-col justify-items-center items-center flex-wrap h-full">
       <form onSubmit = {handleReload}>
-        <button type = 'submit' onSubmit = {handleReload}>Reload</button>
+        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type = 'submit' onSubmit = {handleReload}>Reload</button>
       </form>
-      {weets.map(({ text, privacy, user }, index) => (
+      {weets.map(({ text, timestamp, user }, index) => (
         <Weet
-          key={index}
-          text={text}
-          privacy={privacy}
-          user={user}
+          key = {index}
+          content = {text}
+          first_name = {user[0]['first_name']}
+          last_name = {user[0]['last_name']}
+          username = {user[0]['username']}
+          profile_picture = {user[0]['profile_picture']}
+          time = {timestamp}
         />
       ))}
     </div>

@@ -54,13 +54,13 @@ export function CreateWeet(props) {
     
     // Return
     if (tokenAuth !== 'null') {
-        return <div className='createWeet'>
-            <form onSubmit={handleSubmit}>
+        return <div className='font-fira bg-gray-300 p-3'>
+            <form onSubmit={handleSubmit} className = 'flex place-content-center bg-gray-500 rounded-lg'>
                 <textarea className='
-                        block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        block p-2.5 w-1/3 resize-none text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-fira'
                     ref={textAreaRef} required={true} name='weet'>
                 </textarea>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type='submit'> Weet </button>
+                <button className="bg-blue-500 m-2 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded font-fira" type='submit'> Weet </button>
             </form>
         </div>
     }

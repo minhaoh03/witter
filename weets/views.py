@@ -25,6 +25,7 @@ class WeetViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=201)
         return Response({'Something went wrong'}, 404)
     
+    
 class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()
     serializer_class = DigSerializer

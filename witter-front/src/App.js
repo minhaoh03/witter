@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css';
 import { createBrowserRouter as Router, RouterProvider} from 'react-router-dom';
 
-import { WeetList, CreateWeet, WeetFeed } from './weets'
+import { WeetList, WeetFeed } from './weets'
 import { CreateUser, LoginUser, LogoutUser } from './users'
 
 

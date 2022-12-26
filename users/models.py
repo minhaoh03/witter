@@ -71,7 +71,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     profile_picture = models.ImageField(
         null = True, blank = True,
-        upload_to=('profpics/')
+        upload_to = ('media/images/profpics/'),
+        default = ('media/images/profpics/defaultprofpic.jpg')
     )
     privacy = models.CharField(
         max_length = 9,
