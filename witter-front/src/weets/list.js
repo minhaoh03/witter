@@ -13,7 +13,6 @@ export function WeetList(props) {
     axios.get(domain + 'weets/api/weets/')
       .then((res) => {
         console.log(res.data)
-        console.log(res.data[0].user)
         setWeets(res.data)
         setError(null)
       })
@@ -34,7 +33,7 @@ export function WeetList(props) {
       <form onSubmit = {handleReload}>
         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type = 'submit' onSubmit = {handleReload}>Reload</button>
       </form>
-      {weets.map(({ text, timestamp, user }, index) => (
+      {weets.map(({ text, time_ago, user }, index) => (
         <Weet
           key = {index}
           content = {text}
@@ -42,7 +41,7 @@ export function WeetList(props) {
           last_name = {user[0]['last_name']}
           username = {user[0]['username']}
           profile_picture = {user[0]['profile_picture']}
-          time = {timestamp}
+          time = {time_ago}
         />
       ))}
     </div>

@@ -5,8 +5,15 @@ module.exports = {
     extend: {
       fontFamily: {
         'fira': ['Fira Sans', 'sans-serif'],
+      },
+      spacing: {
+        '136': '34rem',
       }
     },
+    minWidth: {
+      '12': '12px',
+    },
+    
   },
   plugins: [],
 }
