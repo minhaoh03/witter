@@ -29,7 +29,7 @@ export function WeetList(props) {
   if (error) return <p>An error occurred</p>
 
   return (
-    <div className="bg-gray-300 font-fira flex flex-col justify-items-center items-center flex-wrap h-full">
+    <div className="bg-black font-fira flex flex-col justify-items-center items-center flex-wrap h-full">
       <form onSubmit = {handleReload}>
         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type = 'submit' onSubmit = {handleReload}>Reload</button>
       </form>

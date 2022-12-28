@@ -6,6 +6,7 @@
 [] Profile page
 [] Privacy of tweets
 
+[] Navbar
 [] Profile Page
 [] Style the website as needed
 [] SQL Database implementation

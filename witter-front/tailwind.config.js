@@ -8,12 +8,19 @@ module.exports = {
       },
       spacing: {
         '136': '34rem',
+        
+      },
+      width: {
+        '270px': '270px',
       }
     },
     minWidth: {
       '12': '12px',
+      '270px': '270px',
     },
-    
+    maxWidth: {
+      '1/3': '33%',
+    },
   },
   plugins: [],
 }

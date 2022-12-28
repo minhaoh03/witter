@@ -1,27 +1,28 @@
 import React from 'react'
 import './App.css';
-import { createBrowserRouter as Router, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter as Router, RouterProvider } from 'react-router-dom';
 
 import { WeetList, WeetFeed } from './weets'
 import { CreateUser, LoginUser, LogoutUser } from './users'
-
+import { NavBar } from './nav'
+import { SocialBar } from './socials'
 
 const router = Router([
   {
     path: "/",
-    element: <WeetList/>,
+    element: <WeetList />,
   },
   {
     path: "weet",
-    element: <WeetFeed/>,
+    element: <WeetFeed />,
   },
   {
     path: "register",
-    element: <CreateUser/>,
+    element: <CreateUser />,
   },
   {
     path: "login",
-    element: <LoginUser/>,
+    element: <LoginUser />,
   },
   {
     path: "logout",
@@ -30,6 +31,10 @@ const router = Router([
 ]);
 
 
-export function App(props) {
-  return <RouterProvider router={router}/>
+export function App() {
+  return (
+  <div className='flex justify-center bg-black'>
+    <NavBar/><RouterProvider router={router}/><SocialBar/>
+  </div>
+  )
 }
