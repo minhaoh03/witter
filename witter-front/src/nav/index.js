@@ -1,6 +1,6 @@
-import { NavBar } from "./navbar"
-import { Nav } from "./nav"
-import { NavItem } from "./navitem"
+import { NavBar } from "./NavBar"
+import { Nav } from "./Nav"
+import { NavItem } from "./NavItem"
 
 export {
     NavBar,

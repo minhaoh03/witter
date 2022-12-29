@@ -1,15 +1,14 @@
 # To Do List
 ------------
 
-[] Set APIs private specifically weets
-## [] Do the styling of website
-[] Profile page
-[] Privacy of tweets
-
-[] Navbar
-[] Profile Page
-[] Style the website as needed
-[] SQL Database implementation
-[] Tagging
-[] DM implementation? 
+[] UI Design    
+    [] Overflow of Tweet
+[] Comments / Likes / Reweets
+[] Profile/Login/Logout/Register
 [] Pagination
+[] Privacy of WEets
+[] Tagging
+[] Social Bar
+
+
+## [] RESPONSIVENESS!!! 

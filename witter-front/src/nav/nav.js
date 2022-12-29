@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { NavItem } from './navitem';
-import { Router } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { NavItem } from './NavItem';
 import { navItems } from "./tabsHelper";
 
 export function Nav() {
@@ -20,7 +18,7 @@ export function Nav() {
         }
     }
 
-    function generateNavItem({ path, Icon, text, active, badge }, index) {
+    function generateNavItem({ path, Icon, text, active }, index) {
         if (text === 'More') {      // More tab, change in future
             return (
                 <NavItem
@@ -28,7 +26,6 @@ export function Nav() {
                     Icon={Icon}
                     text={text}
                     active={active}
-                    badge={badge}
                 />
             );
         } else {
@@ -40,17 +37,15 @@ export function Nav() {
                     onClick={() => handleClick(text)}
                     draggable="false"
                 >
-                <NavItem Icon={Icon} text={text} active={active} badge={badge} />
+                <NavItem Icon={Icon} text={text} active={active} />
                 </Link>
             );
         }
     }
 
     return (
-        <div className=''>
-            <Router>
+        <div className='flex flex-col'>
             {items.map((navItem, index) => generateNavItem(navItem, index))}
-            </Router>
         </div>
     );
 }

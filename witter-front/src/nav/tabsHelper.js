@@ -1,59 +1,60 @@
+import { HomeIcon } from "../icons";
+import { ExploreIcon } from "../icons/ExploreIcon";
+import { NotificationIcon } from "../icons";
+import { MessageIcon } from "../icons";
+import { BookmarkIcon } from "../icons/BookmarkIcon";
+import { ListIcon } from "../icons";
+import { ProfileIcon } from "../icons";
+import { MoreIcon } from "../icons";
+
 export const navItems = [
     {
       active: false,
       text: 'Home',
       path: '/',
-      badge: false,
-      Icon: null,
+      Icon: HomeIcon,
     },
     {
       active: false,
       text: 'Explore',
-      path: '/explore',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: ExploreIcon,
     },
     {
       active: false,
       text: 'Notifications',
-      path: '/notifications',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: NotificationIcon,
     },
     {
       active: false,
       text: 'Messages',
-      path: '/messages',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: MessageIcon,
     },
     {
       active: false,
       text: 'Bookmarks',
-      path: '/bookmarks',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: BookmarkIcon,
     },
     {
       active: false,
       text: 'Lists',
-      path: '/lists',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: ListIcon,
     },
     {
       active: false,
       text: 'Profile',
-      path: '/profile',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: ProfileIcon,
     },
     {
       active: false,
       text: 'More',
-      path: '',
-      badge: false,
-      Icon: null,
+      path: '/',
+      Icon: MoreIcon,
     },
   ];
   

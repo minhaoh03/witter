@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'fira': ['Fira Sans', 'sans-serif'],
+        'ubuntu': ['Ubuntu', 'sans-serif'],
       },
       spacing: {
         '136': '34rem',
