@@ -62,6 +62,14 @@ class Weet(models.Model):
     def get_likes(self):
         return self.digs.count()
     
+    @property
+    def get_reweets(self):
+        return Weet.objects.filter(parent=self).count()
+    
+    @property
+    def get_comments(self):
+        return Comment.objects.filter(root_weet=self).count()
+    
     class Meta:
         ordering = ['-id']
     

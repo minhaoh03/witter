@@ -18,26 +18,28 @@ export function Nav() {
         }
     }
 
-    function generateNavItem({ path, Icon, text, active }, index) {
+    function generateNavItem({ path, icon, text, active }, index) {
         if (text === 'More') {      // More tab, change in future
             return (
-                <NavItem
-                    key={index}
-                    Icon={Icon}
-                    text={text}
-                    active={active}
-                />
+                <span key={index} className='border-black mr-12 py-2 hover:bg-gray-500/50 duration-200 border-2 rounded-full'>
+                    <NavItem
+                        key={index}
+                        text={text}
+                        active={active}
+                        icon={icon}
+                    />
+                </span>
             );
         } else {
             return (
                 <Link
                     key={index}
-                    className=''
+                    className='border-black mr-12 py-2 hover:bg-gray-500/50 duration-200 border-2 rounded-full'
                     to={path}
                     onClick={() => handleClick(text)}
                     draggable="false"
                 >
-                <NavItem Icon={Icon} text={text} active={active} />
+                    <NavItem icon={icon} text={text} active={active} />
                 </Link>
             );
         }

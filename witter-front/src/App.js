@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css';
 import { createBrowserRouter as Router, RouterProvider, Outlet } from 'react-router-dom';
 
-import { WeetList, WeetFeed } from './weets'
+import { WeetFeed } from './weets'
 import { CreateUser, LoginUser, LogoutUser } from './users'
 import { NavBar } from './nav'
 import { SocialBar } from './socials'
@@ -21,10 +21,6 @@ const router = Router([
     children: [
       {
         path: "/",
-        element: <WeetList />,
-      },
-      {
-        path: "weet",
         element: <WeetFeed />,
       },
       {

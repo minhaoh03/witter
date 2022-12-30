@@ -1,60 +1,51 @@
-import { HomeIcon } from "../icons";
-import { ExploreIcon } from "../icons/ExploreIcon";
-import { NotificationIcon } from "../icons";
-import { MessageIcon } from "../icons";
-import { BookmarkIcon } from "../icons/BookmarkIcon";
-import { ListIcon } from "../icons";
-import { ProfileIcon } from "../icons";
-import { MoreIcon } from "../icons";
-
 export const navItems = [
     {
       active: false,
       text: 'Home',
       path: '/',
-      Icon: HomeIcon,
+      icon: 'home'
     },
     {
       active: false,
       text: 'Explore',
       path: '/',
-      Icon: ExploreIcon,
+      icon: 'explore'
     },
     {
       active: false,
       text: 'Notifications',
       path: '/',
-      Icon: NotificationIcon,
+      icon: 'notification'
     },
     {
       active: false,
       text: 'Messages',
       path: '/',
-      Icon: MessageIcon,
+      icon: 'message'
     },
     {
       active: false,
       text: 'Bookmarks',
       path: '/',
-      Icon: BookmarkIcon,
+      icon: 'bookmark'
     },
     {
       active: false,
       text: 'Lists',
       path: '/',
-      Icon: ListIcon,
+      icon: 'list'
     },
     {
       active: false,
       text: 'Profile',
       path: '/',
-      Icon: ProfileIcon,
+      icon: 'profile'
     },
     {
       active: false,
       text: 'More',
       path: '/',
-      Icon: MoreIcon,
+      icon: 'more'
     },
   ];
   

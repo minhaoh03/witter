@@ -8,6 +8,9 @@ from users.models import User
 class WeetSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField('get_user_field')
     time_ago = serializers.SerializerMethodField('get_time_ago_field')
+    likes = serializers.SerializerMethodField('get_likes')
+    reweets = serializers.SerializerMethodField('get_reweets')
+    comments = serializers.SerializerMethodField('get_comments')
     
     def get_user_field(self, obj):
         return User.objects.filter(id=obj.user.id).values('first_name', 'last_name', 'username', 'profile_picture')
@@ -32,6 +35,15 @@ class WeetSerializer(serializers.ModelSerializer):
             return minutes_ago, "m"
         else:
             return seconds_ago, "s"
+    
+    def get_likes(self, obj):
+        return obj.get_likes
+    
+    def get_reweets(self, obj):
+        return obj.get_reweets
+    
+    def get_comments(self, obj):
+        return obj.get_comments
     
     class Meta:
         model = Weet

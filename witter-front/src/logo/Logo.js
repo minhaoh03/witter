@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LogoIcon } from '../icons';
+import { IonIcon } from '../icons';
 
 export function Logo() {
     return (
@@ -8,7 +8,7 @@ export function Logo() {
             to='/'
             draggable="false"
         >
-            <LogoIcon/>
+            <IonIcon icon='logoFill' size='large' styles='text-yellow-300'/>
         </Link>
     )
 }
