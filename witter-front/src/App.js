@@ -17,32 +17,30 @@ const HeaderLayout = () => (
 
 const router = Router([
   {
+    path: "/",
     element: <HeaderLayout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <WeetFeed />,
       },
-      {
-        path: "register",
-        element: <CreateUser />,
-      },
-      {
-        path: "login",
-        element: <LoginUser />,
-      },
-      {
-        path: "logout",
-        element: <LogoutUser />
-      },
     ],
+  }, {
+    path: "/register",
+    element: <CreateUser />,
+  }, {
+    path: "/login",
+    element: <LoginUser />,
+  }, {
+    path: "/logout",
+    element: <LogoutUser />
   }
 ]);
 
 export function App() {
   return (
-  <div className='flex justify-center bg-black'>
-    <RouterProvider router={router}/>
-  </div>
+    <div className='flex justify-center bg-black h-full'>
+      <RouterProvider router={router}/>
+    </div>
   )
 }

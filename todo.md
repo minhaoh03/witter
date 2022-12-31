@@ -4,10 +4,10 @@
 # [x] Make icons better
 [x] UI Design    
     [x] Overflow of Tweet
-[] Authentication in other file
+[x] Authentication in other file
+[] Profile/Login/Logout/Register
 [] Comments / Likes / Reweets
 [] Privacy of weets
-[] Profile/Login/Logout/Register
 [] WeetCreate look better
 [] Pagination
 [] Privacy of Weets

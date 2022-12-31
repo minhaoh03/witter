@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { lookup } from '../backendLookup';
 
 export async function checkAuth() {
     let csrf = ''
@@ -6,22 +6,24 @@ export async function checkAuth() {
     // Token Auth Variable
     let tokenAuth = localStorage.getItem('token')
 
-    // CSRF getter
-    await axios.get("http://localhost:8000/users/auth/csrf/", {
-            withCredentials: true,
-    }).then((res) => {
-            console.log(res)
-            let csrfToken = res.headers.get("X-CSRFToken");
-            csrf = csrfToken
-        })
-
-
     // Non logged in user
     if (tokenAuth === 'null') {
         window.location.href = 'https://localhost:8000/login'
     }
 
-    var ret = new Array();
+    // CSRF getter
+    const data = await lookup(
+        process.env.REACT_APP_BACKEND_DOMAIN,
+        'users/auth/csrf/',
+        'get',
+        undefined,
+        {},
+        true,
+    )
+
+    csrf = data.headers.get("X-CSRFToken")
+
+    var ret = []
 
     if (tokenAuth !== 'null' && csrf !== '') {
         ret[0] = tokenAuth

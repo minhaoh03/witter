@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import { lookup } from '../backendLookup'
 
 export function CreateUser(props) {
     const emailRef = React.createRef()
@@ -10,9 +10,9 @@ export function CreateUser(props) {
     const bdayRef = React.createRef()
     const privRef = React.createRef()
 
-    const domain = 'http://localhost:8000/' // Change
+    const domain = process.env.REACT_APP_BACKEND_DOMAIN // Change
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         var email = emailRef.current.value
         var un = unRef.current.value
@@ -30,49 +30,52 @@ export function CreateUser(props) {
             last_name: lname,
             bio: null,
             birth_date: bday,
-            date_created: null,
-            profile_picture: null,
             privacy: priv,
-            is_active: true,
-            is_staff: false,
-            is_superuser: false,
-            groups: [],
-            user_permissions: []
+            // groups: [],
+            // user_permissions: []
         })
 
-        try { 
-            let result = axios.post(domain + 'users/api/', data, {headers: {
+        await lookup(
+            domain,
+            'users/api/',
+            'post',
+            data,
+            {
                 'Content-Type': 'application/json'
-            }})
-            console.log(result.response.data)
-        }
-        catch(error) {
-            console.log(error.message);
-        }
+            }
+        )
     }
 
-    return <div>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="email"> Email: </label>
-            <input type="email" id="email" ref={emailRef} required/>
-            <label htmlFor="username"> Username: </label>
-            <input type="username" id="username" ref={unRef} required/>
-            <label htmlFor="firstname"> First Name: </label>
-            <input id="firstname" ref={fnameRef} required/>
-            <label htmlFor="lastname"> Last Name: </label>
-            <input id="lastname" ref={lnameRef} required/>
-            <label htmlFor="password"> Password: </label>
-            <input type="password" id="password" minLength="8" ref={passwordRef} required/>
-            <label htmlFor="birthdate"> Birthday: </label>
-            <input type="date" id="bday" ref={bdayRef} required/>
-            <label htmlFor="privacy"> Privacy: </label>
-            <select name="privacy" id="privacy" ref={privRef}> 
-                <option value="private"> Private </option>
-                <option value="public"> Public </option>
-                <option value="followers"> Followers </option>
-            </select>
+    return (
+        <div className='text-gray-400'>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email"> Email: </label>
+                <input type="email" id="email" ref={emailRef} required/>
 
-            <input type="submit" value="Submit"/>
-        </form>
-    </div>
+                <label htmlFor="username"> Username: </label>
+                <input type="username" id="username" ref={unRef} required/>
+
+                <label htmlFor="firstname"> First Name: </label>
+                <input id="firstname" ref={fnameRef} required/>
+
+                <label htmlFor="lastname"> Last Name: </label>
+                <input id="lastname" ref={lnameRef} required/>
+
+                <label htmlFor="password"> Password: </label>
+                <input type="password" id="password" minLength="8" ref={passwordRef} required/>
+
+                <label htmlFor="birthdate"> Birthday: </label>
+                <input type="date" id="bday" ref={bdayRef} required/>
+
+                <label htmlFor="privacy"> Privacy: </label>
+                <select name="privacy" id="privacy" ref={privRef}> 
+                    <option value="private"> Private </option>
+                    <option value="public"> Public </option>
+                    <option value="followers"> Followers </option>
+                </select>
+
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    )
 }

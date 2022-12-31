@@ -1,6 +1,6 @@
 export const navItems = [
     {
-      active: false,
+      active: true,
       text: 'Home',
       path: '/',
       icon: 'home'

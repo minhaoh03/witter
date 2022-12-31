@@ -1,40 +1,14 @@
-import axios from 'axios'
-import React, { useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
 import { checkAuth } from '../auth';
 import { lookup } from '../backendLookup';
 
 export function CreateWeet(props) {
-    // const [csrf, setCSRF] = useState('')
-
     const textAreaRef = React.createRef()
-    const domain = process.env.REACT_BACKEND_DOMAIN
-    const auth = useRef(checkAuth())
+    const domain = process.env.REACT_APP_BACKEND_DOMAIN
+    
 
-    // const navigate = useNavigate()
-
-    // // Token Auth Variable
-    // let tokenAuth = localStorage.getItem('token')
-
-    // // CSRF getter
-    // useEffect(() => {
-    //     axios.get("http://localhost:8000/users/auth/csrf/", {
-    //          withCredentials: true,
-    //     })
-    //         .then((res) => {
-    //             let csrfToken = res.headers.get("X-CSRFToken");
-    //             setCSRF(csrfToken)
-    //         })
-    // }, []);
-
-    // // Non logged in user
-    // useEffect(() => {
-    //     if (tokenAuth === 'null') {
-    //         return navigate('/login')
-    //     }
-    // })
     // Creating new weet submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         var textAreaVal = textAreaRef.current.value
         
@@ -42,9 +16,11 @@ export function CreateWeet(props) {
             props.create(created => !created)
             textAreaRef.current.value = ''
         }
+        
+        let auth = await checkAuth()
 
-        lookup(
-            domain = domain, 
+        await lookup(
+            domain, 
             'weets/api/weets/', 
             'post', 
             {
@@ -58,8 +34,9 @@ export function CreateWeet(props) {
                 'Authorization' : auth[0],
                 "X-CSRFToken": auth[1],
             }, 
-            finishCreate()
         )
+
+        finishCreate()
     }
 
     // Return

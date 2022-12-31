@@ -2,7 +2,6 @@ import React, { useState, useEffect, } from 'react'
 
 import { Weet } from './detail'
 import { lookup } from '../backendLookup'
-import { asyncLookup } from '../backendLookup'
 
 export function WeetList(props) {
   const domain = process.env.REACT_APP_BACKEND_DOMAIN //change
@@ -29,7 +28,7 @@ export function WeetList(props) {
     event.preventDefault()
     setReload(!reload)
   }
-  console.log(weets)
+  
   return (
     <div className="bg-black font-fira flex flex-col justify-items-center items-center flex-wrap h-full">
       <form onSubmit={handleReload}>

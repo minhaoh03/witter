@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 import { IonIcon } from '../icons/IonIcons'
-import axios from 'axios'
-import { checkAuth } from '../auth'
 
 export function Weet(props) {
     const { content, username, first_name, last_name, profile_picture, time, reweets, comments } = props
-    const domain = process.env.REACT_BACKEND_DOMAIN
-    const mediaDomain = domain + 'media/'
-    const profPic = mediaDomain + profile_picture
-
-    const auth = checkAuth()
+    const domain = process.env.REACT_APP_BACKEND_DOMAIN
+    const profPic = domain + profile_picture
 
     const [likes, setLikes] = useState(props.likes)
 
@@ -17,17 +12,9 @@ export function Weet(props) {
         e.preventDefault()
     }
 
-    async function handleLike(e) {
+    function handleLike(e) {
         e.preventDefault()
-        await axios.post(domain + 'weets/api/digs/', {
-            
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : auth[0],
-                "X-CSRFToken": auth[1],
-            }
-        })
+        
     }
 
     return (
