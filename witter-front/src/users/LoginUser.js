@@ -10,19 +10,9 @@ export function LoginUser() {
     const [loggedin, setLoggedIn] = useState(false);
     const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:8000/users/auth/csrf/", {
-    //          withCredentials: true,
-    //     })
-    //         .then((res) => {
-    //             let csrfToken = res.headers.get("X-CSRFToken");
-    //             setCSRF(csrfToken)
-    //         })
-    // }, []);
-
     useEffect(() => {
         if(loggedin) {
-            return navigate('/');
+            return navigate('/home');
         }
     }, [loggedin, navigate]);
 

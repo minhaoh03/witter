@@ -5,12 +5,13 @@
 [x] UI Design    
     [x] Overflow of Tweet
 [x] Authentication in other file
-[] Profile/Login/Logout/Register
-[] Comments / Likes / Reweets
-[] Privacy of weets
+[] Login/Logout/Register
 [] WeetCreate look better
+[] Comments / Likes / Reweets
+[] Profile
+[] Privacy of weets
 [] Pagination
-[] Privacy of Weets
+[] Reorganize buttons
 [] Tagging
 [] Social Bar
 

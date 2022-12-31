@@ -3,7 +3,7 @@ import './App.css';
 import { createBrowserRouter as Router, RouterProvider, Outlet } from 'react-router-dom';
 
 import { WeetFeed } from './weets'
-import { CreateUser, LoginUser, LogoutUser } from './users'
+import { CreateUser, LoginUser, LogoutUser, JoinUser } from './users'
 import { NavBar } from './nav'
 import { SocialBar } from './socials'
 
@@ -21,10 +21,13 @@ const router = Router([
     element: <HeaderLayout />,
     children: [
       {
-        path: "",
+        path: "home",
         element: <WeetFeed />,
       },
     ],
+  }, {
+    path: "/welcome",
+    element: <JoinUser />
   }, {
     path: "/register",
     element: <CreateUser />,
@@ -39,7 +42,7 @@ const router = Router([
 
 export function App() {
   return (
-    <div className='flex justify-center bg-black h-full'>
+    <div className='flex justify-center bg-black h-max'>
       <RouterProvider router={router}/>
     </div>
   )
