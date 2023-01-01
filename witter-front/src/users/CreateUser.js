@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { lookup } from '../backendLookup'
+import { Logo } from '../logo'
+import { useNavigate } from 'react-router-dom'
 
-export function CreateUser(props) {
+export function CreateUser() {
     const emailRef = React.createRef()
     const unRef = React.createRef()
     const fnameRef = React.createRef()
     const lnameRef = React.createRef()
     const passwordRef = React.createRef()
     const bdayRef = React.createRef()
-    const privRef = React.createRef()
+
+    const navigate = useNavigate()
 
     const domain = process.env.REACT_APP_BACKEND_DOMAIN // Change
 
@@ -20,7 +23,6 @@ export function CreateUser(props) {
         var lname = lnameRef.current.value
         var password = passwordRef.current.value
         var bday = bdayRef.current.value
-        var priv = privRef.current.value
         
         let data = JSON.stringify({
             password: password,
@@ -30,9 +32,6 @@ export function CreateUser(props) {
             last_name: lname,
             bio: null,
             birth_date: bday,
-            privacy: priv,
-            // groups: [],
-            // user_permissions: []
         })
 
         await lookup(
@@ -44,37 +43,49 @@ export function CreateUser(props) {
                 'Content-Type': 'application/json'
             }
         )
+        navigate('/home')
     }
 
     return (
-        <div className='text-gray-400'>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email"> Email: </label>
-                <input type="email" id="email" ref={emailRef} required/>
+        <div className='h-screen font-roboto'>
+            <div className='ml-[49%] mt-2'>
+                <Logo color = '#FFFFFF'/>
+            </div>
 
-                <label htmlFor="username"> Username: </label>
-                <input type="username" id="username" ref={unRef} required/>
+            <div className='text-gray-400 font-extrabold text-[1.5rem] ml-[-15rem] text-center mt-8'> 
+                Create Your Account 
+            </div>
+            
+            <form onSubmit={handleSubmit} className='flex flex-col text-white items-center w-screen mt-4'>
+                <div id='email' className='my-2'>
+                    <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Email</span>
+                    <input type="email" ref={emailRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                </div>
+                <div id='username' className='my-2'>
+                    <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Username</span>
+                    <input type="username" id="username" ref={unRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                </div>
+                <div id='name' className='flex flex-row my-2'>
+                    <div id='firstname' className='mx-1'>
+                        <span className='absolute text-xs mt-1 ml-2 text-gray-500'>First Name</span>
+                        <input id="firstname" ref={fnameRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[13.8rem]' required/>
+                    </div>
+                    <div id='lastname' className='mx-1'>
+                        <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Last Name</span>
+                        <input id="lastname" ref={lnameRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[13.8rem]' required/>
+                    </div>
+                </div>
+                
+                <div id='password' className='my-2'>
+                    <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Password (8 char min.)</span>
+                    <input type="password" id="password" minLength="8" ref={passwordRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                </div>
+                <div id='bday' className='mt-1 mb-10'>
+                    <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Date of Birth</span>
+                    <input type="date" id="bday" ref={bdayRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                </div>
 
-                <label htmlFor="firstname"> First Name: </label>
-                <input id="firstname" ref={fnameRef} required/>
-
-                <label htmlFor="lastname"> Last Name: </label>
-                <input id="lastname" ref={lnameRef} required/>
-
-                <label htmlFor="password"> Password: </label>
-                <input type="password" id="password" minLength="8" ref={passwordRef} required/>
-
-                <label htmlFor="birthdate"> Birthday: </label>
-                <input type="date" id="bday" ref={bdayRef} required/>
-
-                <label htmlFor="privacy"> Privacy: </label>
-                <select name="privacy" id="privacy" ref={privRef}> 
-                    <option value="private"> Private </option>
-                    <option value="public"> Public </option>
-                    <option value="followers"> Followers </option>
-                </select>
-
-                <input type="submit" value="Submit"/>
+                <input className='w-[28rem] border-1 bg-yellow-400 rounded-full py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Sign up"/>
             </form>
         </div>
     )

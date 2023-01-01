@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { IonIcon } from '../icons';
 
-export function Logo() {
+export function Logo(props) {
+    let {color} = props
     return (
         <Link
             className=''
             to='/'
             draggable="false"
         >
-            <IonIcon icon='logoFill' size='large' styles='text-yellow-300'/>
+            <IonIcon icon='logoFill' size='large' styles={{color: color}}/>
         </Link>
     )
 }

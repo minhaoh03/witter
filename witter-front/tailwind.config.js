@@ -6,7 +6,8 @@ module.exports = {
       fontFamily: {
         'fira': ['Fira Sans', 'sans-serif'],
         'ubuntu': ['Ubuntu', 'sans-serif'],
-        'lato': ['Lato', 'sans-serif']
+        'lato': ['Lato', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
       },
       spacing: {
         '136': '34rem',
