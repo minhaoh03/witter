@@ -3,6 +3,7 @@ import { LoginUser } from './LoginUser'
 import { LogoutUser } from './LogoutUser'
 import { JoinUser } from './JoinUser'
 import { Profile } from './Profile'
+import { UserAuth } from './UserAuth'
 
 export {
     CreateUser,
@@ -10,4 +11,5 @@ export {
     LogoutUser,
     JoinUser,
     Profile,
+    UserAuth,
 }

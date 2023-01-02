@@ -35,6 +35,19 @@ class UserViewSet(viewsets.ModelViewSet):
             return User.objects.get(pk=id_) # <-- tried to get by email here
         except User.DoesNotExist:
             return None
+        
+def get_user_by_token(request):
+    token = request.headers['Authorization'][6:]
+    user = User.objects.get(id=Token.objects.get(key=token).user.id)
+    return JsonResponse({"username": user.email,
+                         "email": user.email,
+                         "first_name": user.first_name,
+                         "last_name": user.last_name, 
+                         "bio": user.bio,
+                         "birth_date": user.birth_date,
+                         "date_joined": user.date_joined,
+                         "profile_picture": str(user.profile_picture)
+                        })
 
 def get_csrf(request):
     response = JsonResponse({'detail': 'CSRF cookie set'})
