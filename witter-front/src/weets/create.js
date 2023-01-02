@@ -5,7 +5,6 @@ import { lookup } from '../backendLookup';
 export function CreateWeet(props) {
     const textAreaRef = React.createRef()
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
-    
 
     // Creating new weet submission
     const handleSubmit = async (event) => {
@@ -40,13 +39,15 @@ export function CreateWeet(props) {
     }
 
     // Return
-    return <div className='font-fira bg-black p-3'>
-        <form onSubmit={handleSubmit} className = 'flex place-content-center border-[1px] border-gray-400/[0.5] rounded-lg'>
-            <textarea className='
-                    block p-2.5 w-full resize-none text-sm text-gray-900 bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-fira'
-                ref={textAreaRef} required={true} name='weet'>
-            </textarea>
-            <button className="bg-blue-500 m-2 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded font-fira" type='submit'> Weet </button>
-        </form>
-    </div>
+    return (
+        <div className='font-roboto bg-black'>
+            <form onSubmit={handleSubmit} className = 'flex flex-col border-b-[1px] border-gray-400/[0.5] mb-2 min-h-[100px]'>
+                <textarea className='
+                        block ml-16 p-2.5 overflow-auto outline-none resize-none placeholder-gray-500 text-lg bg-black text-gray-300'
+                    ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
+                </textarea>
+                <button className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] self-end mb-2 mr-5 hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
+            </form>
+        </div>
+    )
 }

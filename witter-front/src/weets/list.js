@@ -31,8 +31,8 @@ export function WeetList(props) {
   
   return (
     <div className="bg-black font-fira flex flex-col justify-items-center items-center flex-wrap h-full">
-      <form onSubmit={handleReload}>
-        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type='submit' onSubmit={handleReload}>Reload</button>
+      <form className='w-full'onSubmit={handleReload}>
+        <button className="text-yellow-300 text-sm border-b-[1px] w-full border-gray-400/50 pb-2 hover:bg-white/[.03]" type='submit' onSubmit={handleReload}>Show New Weets</button>
       </form>
       {weets.map(({ text, time_ago, user, likes, reweets, comments }, index) => (
         <Weet

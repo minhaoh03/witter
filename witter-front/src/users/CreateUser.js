@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { lookup } from '../backendLookup'
 import { Logo } from '../logo'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export function CreateUser() {
     const emailRef = React.createRef()
@@ -48,7 +49,7 @@ export function CreateUser() {
 
     return (
         <div className='h-screen font-roboto'>
-            <div className='ml-[49%] mt-2'>
+            <div className='ml-[49%] pt-2'>
                 <Logo color = '#FFFFFF'/>
             </div>
 
@@ -85,8 +86,10 @@ export function CreateUser() {
                     <input type="date" id="bday" ref={bdayRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
                 </div>
 
-                <input className='w-[28rem] border-1 bg-yellow-400 rounded-full py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Sign up"/>
+                <input className='w-[28rem] border-1 bg-yellow-400 rounded-full mb-2 py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Sign up"/>
             </form>
+
+            <span className='text-gray-400 ml-[34%] text-xs pt-2'>Already have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/login' draggable="false">Sign in.</Link></span>
         </div>
     )
 }

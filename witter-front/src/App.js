@@ -6,14 +6,21 @@ import { WeetFeed } from './weets'
 import { CreateUser, LoginUser, LogoutUser, JoinUser } from './users'
 import { NavBar } from './nav'
 import { SocialBar } from './socials'
+import { checkAuth } from './auth';
+import { Profile } from './users';
 
-const HeaderLayout = () => (
-  <>
-    <NavBar />
-    <Outlet />
-    <SocialBar />
-  </>
-);
+const HeaderLayout = () => {
+  checkAuth()
+  return window.location.href === process.env.REACT_APP_DOMAIN ? (
+    window.location.href = process.env.REACT_APP_DOMAIN + 'home/'
+  ) : (
+    <div className='relative inline-block'>
+      <NavBar />
+      <Outlet />
+      <SocialBar />
+    </div>
+  )
+};
 
 const router = Router([
   {
@@ -24,6 +31,10 @@ const router = Router([
         path: "home",
         element: <WeetFeed />,
       },
+      {
+        path: "profile",
+        element: <Profile />,
+      }
     ],
   }, {
     path: "/welcome",
@@ -42,7 +53,7 @@ const router = Router([
 
 export function App() {
   return (
-    <div className='flex justify-center bg-black h-max'>
+    <div className='bg-black'>
       <RouterProvider router={router}/>
     </div>
   )

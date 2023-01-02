@@ -8,7 +8,7 @@ export async function checkAuth() {
 
     // Non logged in user
     if (tokenAuth === 'null') {
-        window.location.href = 'https://localhost:8000/login'
+        window.location.href = process.env.REACT_APP_DOMAIN + 'welcome/'
     }
 
     // CSRF getter

@@ -1,4 +1,4 @@
-import { checkAuth } from "./checkauth";
+import { checkAuth } from "./checkAuth";
 import { getCSRF } from "./getCSRF";
 
 export {

@@ -5,10 +5,10 @@
 [x] UI Design    
     [x] Overflow of Tweet
 [x] Authentication in other file
-[] Login/Logout/Register
+[x] Login/Logout/Register
 [] WeetCreate look better
-[] Comments / Likes / Reweets
 [] Profile
+[] Comments / Likes / Reweets
 [] Privacy of weets
 [] Pagination
 [] Reorganize buttons

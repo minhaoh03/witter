@@ -1,5 +1,7 @@
-import { SocialBar } from "./socials";
+import { SocialBar } from "./Socials";
+import { SearchBar } from "./SearchBar";
 
 export {
-    SocialBar
+    SocialBar,
+    SearchBar
 }

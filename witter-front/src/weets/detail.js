@@ -18,7 +18,7 @@ export function Weet(props) {
     }
 
     return (
-    <div className='grid grid-rows-4 grid-cols-9 rounded-lg border-[1px] border-gray-400/[0.5] m-2 w-[95%] h-36 overflow-hidden hover:bg-white/[.01] duration-200' id='weetContainer'>
+    <div className='grid grid-rows-4 grid-cols-9 rounded-lg border-[1px] border-gray-400/[0.5] m-2 w-[95%] h-36 overflow-hidden hover:bg-white/[.03] duration-200' id='weetContainer'>
         <div className='flex flex-col place-items-center row-start-1 row-end-4 col-start-1 col-end-2 mt-1 ml-2' id='left'>
             <div id='image' className='mt-2.5 min-w-12'>
                 <img className='shadow rounded-full align-middle border-none object-cover w-12 h-12' src={profPic} alt="profile pic" />

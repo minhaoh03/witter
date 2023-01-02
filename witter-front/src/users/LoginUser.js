@@ -57,26 +57,27 @@ export function LoginUser() {
 
     return (
         <div className='h-screen font-roboto'>
-            <div className='ml-[49%] mt-2'>
+            <div className='ml-[49%] pt-2'>
                 <Logo color = '#FFFFFF'/>
             </div>
             <div className='text-gray-400 font-extrabold text-[1.5rem] mt-28 text-center mt-8'> 
                 Welcome Back.
             </div>
-            <form onSubmit={handleLogin} className="flex flex-col text-white mb-3">
+            <form onSubmit={handleLogin} className="flex flex-col items-center w-screen text-white mb-3">
                 <div id='username' className='my-6'>
                     <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Username</span>
-                    <input type="username" id="username" value={username} onChange={handleUsernameChange} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                    <input type="username" value={username} onChange={handleUsernameChange} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
                 </div>
                 
                 <div id='password' className='mt-1 mb-10'>
                     <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Password</span>
-                    <input type="password" id="password" minLength="8" value={password} onChange={handlePasswordChange} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
+                    <input type="password" value={password} onChange={handlePasswordChange} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[28rem]' required/>
                 </div>
 
                 <input className='w-[28rem] border-1 bg-yellow-400 rounded-full py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Log in"/>
+                
             </form>
-            <span className='text-white text-xs text-gray-400'> Don't have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/register' draggable="false"> Create an Account. </Link></span>
+            <span className='text-white text-xs ml-[34%] text-gray-400'> Don't have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/register' draggable="false"> Create an Account. </Link></span>
         </div>
     )
 }

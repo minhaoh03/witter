@@ -2,49 +2,49 @@ export const navItems = [
     {
       active: true,
       text: 'Home',
-      path: '/',
+      path: '/home',
       icon: 'home'
     },
     {
       active: false,
       text: 'Explore',
-      path: '/',
+      path: '/home',
       icon: 'explore'
     },
     {
       active: false,
       text: 'Notifications',
-      path: '/',
+      path: '/home',
       icon: 'notification'
     },
     {
       active: false,
       text: 'Messages',
-      path: '/',
+      path: '/home',
       icon: 'message'
     },
     {
       active: false,
       text: 'Bookmarks',
-      path: '/',
+      path: '/home',
       icon: 'bookmark'
     },
     {
       active: false,
       text: 'Lists',
-      path: '/',
+      path: '/home',
       icon: 'list'
     },
     {
       active: false,
       text: 'Profile',
-      path: '/',
+      path: '/profile',
       icon: 'profile'
     },
     {
       active: false,
       text: 'More',
-      path: '/',
+      path: '/home',
       icon: 'more'
     },
   ];
