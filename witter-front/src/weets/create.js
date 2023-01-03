@@ -49,7 +49,7 @@ export function CreateWeet(props) {
                 <div className='flex'>
                     <span className='ml-2'><img src={picLink} className='shadow m-1 rounded-full border-none object-cover w-12 h-12' alt='profile pic'></img></span>
                     <textarea className='
-                            block ml-2 p-2.5 w-full overflow-auto outline-none resize-none placeholder-gray-500 text-lg bg-black text-gray-300'
+                            block ml-2 p-2.5 w-[90%] overflow-auto outline-none resize-none placeholder-gray-500 text-lg bg-black text-gray-300'
                         ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
                     </textarea>
                 </div>
