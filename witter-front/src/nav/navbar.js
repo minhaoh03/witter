@@ -1,21 +1,10 @@
-import { useEffect, useState } from 'react';
 import { Nav } from './Nav';
 import { Logo } from '../logo';
 import { WeetButton } from '../buttons'
 import { UserAuth } from '../users';
-import { getUser } from '../auth';
 
-export async function NavBar() {
-    const [user, setUser] = useState()
-    useEffect(() => {
-        async function fetchData() {
-            let response = await getUser()
-            response = await response.json()
-            setUser(response)
-        }
-    }, [])
-
-    console.log(user)
+export function NavBar(props) {
+    const {user} = props
 
     return (
         <div className="sticky top-0 align-top h-screen inline-block ml-[10vw] w-[240px] min-w-[240px] border-r-[1px] border-gray-400/[0.5] text-white bg-black">
@@ -29,7 +18,7 @@ export async function NavBar() {
                 <WeetButton />
             </div>
             <div>
-                <UserAuth user={user} />
+                <UserAuth user = {user}/>
             </div>
         </div>
     )

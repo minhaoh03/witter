@@ -16,6 +16,7 @@ export const ioniconMap = {
     'profile': "person-outline",
     'profileFill': "person",
     'more': "ellipsis-horizontal-outline",
+    'moreFill': "ellipsis-horizontal",
 
     //Logo
 

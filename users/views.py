@@ -39,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
 def get_user_by_token(request):
     token = request.headers['Authorization'][6:]
     user = User.objects.get(id=Token.objects.get(key=token).user.id)
-    return JsonResponse({"username": user.email,
+    return JsonResponse({"username": user.username,
                          "email": user.email,
                          "first_name": user.first_name,
                          "last_name": user.last_name, 
