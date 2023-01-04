@@ -89,7 +89,7 @@ export function CreateUser() {
                 <input className='w-[28rem] border-1 bg-yellow-400 rounded-full mb-2 py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Sign up"/>
             </form>
 
-            <span className='text-gray-400 ml-[34%] text-xs pt-2'>Already have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/login' draggable="false">Sign in.</Link></span>
+            <span className='absolute text-gray-400 right-[52%] text-xs pt-2'>Already have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/login' draggable="false">Sign in.</Link></span>
         </div>
     )
 }

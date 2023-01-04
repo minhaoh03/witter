@@ -14,15 +14,18 @@ const HeaderLayout = () => {
   useEffect(() => {
     const fetchData = async () => {
       let response = await getUser()
+      console.log(response)
       setUser(response)
+      
     }
     fetchData()
+    
   }, [])
 
   return window.location.href === process.env.REACT_APP_DOMAIN ? (
     window.location.href = process.env.REACT_APP_DOMAIN + 'home/'
   ) : (
-    <div className='relative inline-block'>
+    <div className='relative inline-block w-full'>
       <NavBar user={user} />
       <Outlet context={[user,setUser]} />
       <SocialBar />

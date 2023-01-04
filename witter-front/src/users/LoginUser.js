@@ -77,7 +77,7 @@ export function LoginUser() {
                 <input className='w-[28rem] border-1 bg-yellow-400 rounded-full py-[0.5rem] text-white font-bold hover:bg-yellow-500 duration-150 hover:cursor-pointer' type="submit" value="Log in"/>
                 
             </form>
-            <span className='text-white text-xs ml-[34%] text-gray-400'> Don't have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/register' draggable="false"> Create an Account. </Link></span>
+            <span className='relative text-white text-xs left-1/2 text-gray-400'> Don't have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/register' draggable="false"> Create an Account. </Link></span>
         </div>
     )
 }

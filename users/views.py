@@ -30,6 +30,15 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(serializer.errors,
             status = status.HTTP_400_BAD_REQUEST)
     
+    def partial_update(self, request, *args, **kwargs):
+        data = request.data
+        instance = self.queryset.get(pk=kwargs.get('pk'))
+        serializer = UserSerializer(instance, data = data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+        print(serializer.errors)
+        return Response(serializer.data)
+    
     def get_user(id_):
         try:
             return User.objects.get(pk=id_) # <-- tried to get by email here
@@ -39,7 +48,8 @@ class UserViewSet(viewsets.ModelViewSet):
 def get_user_by_token(request):
     token = request.headers['Authorization'][6:]
     user = User.objects.get(id=Token.objects.get(key=token).user.id)
-    return JsonResponse({"username": user.username,
+    return JsonResponse({"id": user.id,
+                         "username": user.username,
                          "email": user.email,
                          "first_name": user.first_name,
                          "last_name": user.last_name, 

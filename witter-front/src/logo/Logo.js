@@ -6,7 +6,7 @@ export function Logo(props) {
     return (
         <Link
             className=''
-            to='/'
+            to='/home'
             draggable="false"
         >
             <IonIcon icon='logoFill' size='large' styles={{color: color}}/>
