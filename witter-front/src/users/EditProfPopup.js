@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { lookup } from "../backendLookup"
 
 export function EditProfilePopup(props) {
+    const [pic, setPic] = useState('')
     const emailRef = React.createRef()
     const fnameRef = React.createRef()
     const lnameRef = React.createRef()
@@ -14,28 +15,28 @@ export function EditProfilePopup(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let data = JSON.stringify({
-            email: emailRef.current.value,
-            first_name: fnameRef.current.value,
-            last_name: lnameRef.current.value,
-            bio: bioRef.current.value,
-            birth_date: bdayRef.current.value,
-        })
+        let formData = new FormData()
+        formData.append('profile_picture', document.getElementById('profpicinput').files[0], 'profpic.png')
+        formData.append('email', emailRef.current.value)
+        formData.append('first_name', fnameRef.current.value)
+        formData.append('last_name', lnameRef.current.value)
+        formData.append('bio', bioRef.current.value)
+        formData.append('birth_date', bdayRef.current.value)
         await lookup(
             process.env.REACT_APP_BACKEND_DOMAIN,
             `users/api/${props.user.id}/`,
             'patch',
-            data,
-            {
-                'Content-Type': 'application/json',
-            },
+            formData,
+            {},
             {},
         )
         window.location.reload();
         props.toggle()
     }
 
-
+    function chooseFile() {
+        document.getElementById("profpicinput").click();
+    }
 
     return (
         <div className='absolute w-[100%] h-full ml-[-30%] bg-white/25 z-20 text-white'>
@@ -45,8 +46,11 @@ export function EditProfilePopup(props) {
                     <span className="relative font-bold text-lg ml-[5%] mt-[1vh]"> Edit profile </span>
                     <form><button onClick={handleSubmit} className='absolute rounded-full px-3 py-1 bg-white text-black font-semibold text-sm ml-[50%] mt-[2%] hover:bg-white/[.95] duration-150'>Save</button></form>
                 </div>
-                <div className="mx-[5%] w-[90%]">
-                    <button className=""><img src={props.picLink} className='shadow m-3 rounded-full border-black border-4 object-cover w-32 h-32'/></button>
+                <div className="flex flex-col mx-[5%] w-[90%]">
+                    <div className='flex flex-col self-center h-full w-full'>
+                        <input id='profpicinput' accept="image/jpeg,image/png" type='file' className='h-0 overflow-hidden'/>
+                        <img src={props.picLink} onClick={chooseFile} className="cursor-pointer self-center shadow m-3 rounded-full border-black border-4 object-cover w-32 h-32 filter hover:brightness-90"/>
+                    </div>
                     <div id='email' className='mb-2'>
                         <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Email</span>
                         <input type="email" ref={emailRef} className='outline-none border-[1px] border-gray-400/[0.5] rounded bg-black px-2 pb-2 pt-5 text-sm w-[100%]' defaultValue={props.user.email} required/>

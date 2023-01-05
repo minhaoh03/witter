@@ -10,5 +10,7 @@ router.register(r'digs', views.DigViewSet, basename = 'dig')
 router.register(r'comments', views.CommentViewSet, basename = 'comment')
 
 urlpatterns = [
-    path('api/', include(router.urls))
+    path('digs/digged/', views.diggedWeet, name='diggedWeet'),
+    path('api/', include(router.urls)),
+
 ]

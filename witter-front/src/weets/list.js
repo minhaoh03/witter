@@ -19,7 +19,6 @@ export function WeetList(props) {
         undefined,
         undefined,
       )
-      console.log(data.data)
       setWeets(data.data)
     }
     fetchData()
@@ -40,6 +39,7 @@ export function WeetList(props) {
           key={index}
           id={id}
           content={text}
+          user_id = {user[0]['id']}
           first_name={user[0]['first_name']}
           last_name={user[0]['last_name']}
           username={user[0]['username']}

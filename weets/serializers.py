@@ -13,7 +13,7 @@ class WeetSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField('get_comments')
     
     def get_user_field(self, obj):
-        return User.objects.filter(id=obj.user.id).values('first_name', 'last_name', 'username', 'profile_picture')
+        return User.objects.filter(id=obj.user.id).values('id', 'first_name', 'last_name', 'username', 'profile_picture')
     
     def get_time_ago_field(self, obj):
         time_created = obj.timestamp

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 
 export function UserAuth(props) {
     const {user} = props
-    console.log(user)
     const navigate = useNavigate()
     
     const picLink = process.env.REACT_APP_BACKEND_DOMAIN + user['profile_picture']

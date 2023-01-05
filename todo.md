@@ -10,15 +10,30 @@
 [x] Profile
 [] Comments / Likes / Reweets
 [] Privacy of weets
+
+----------------------------------
 [] Pagination
 [] Reorganize buttons
 [] Tagging
 [] Social Bar
 
-
-## [] RESPONSIVENESS!!! 
-
-###### [x] Relocate all API calls to separate file
 ###### [] BUTTON JS FILE?
-###### [x] Organize icons
-###### [] Balance loading setStates
+
+[] Like system, remove like, add like, icon
+[] Fix link
+[] Change profile picture
+[] Commenting system, add comments and numbers under the weet individual
+[] Reweet system, make reweets under the feed, individual component
+[] Have individual feeds, follow, and unfollow
+
+LATER
+[] Organize all code (DO THIS)
+#   [] Balance loading setStates
+[] Pagination
+[] Implement Postgre
+[] Add pages for other tabs, bookmarking, messaging etc
+[] Tagging
+[] Social Bar
+[] Responsiveness
+
+

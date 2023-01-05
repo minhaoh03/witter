@@ -1,11 +1,11 @@
 # django utils
-from django.shortcuts import render
-from django.http import QueryDict
+from django.http import JsonResponse
 
 # DRF
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import api_view
 
 # py
 from .models import Weet, Dig, Comment
@@ -29,6 +29,17 @@ class WeetViewSet(viewsets.ModelViewSet):
 class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()
     serializer_class = DigSerializer
+
+@api_view(["DELETE"])
+def diggedWeet(request):
+    data = request.data
+    user = data['user']
+    weet = data['weet']
+    curDig = Dig.objects.all().filter(weet = weet, user = user)
+    if curDig:
+        Dig.objects.all().filter(weet = weet, user = user).delete()
+        return JsonResponse({'deleted': True})
+    return JsonResponse({'deleted': False})
     
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
