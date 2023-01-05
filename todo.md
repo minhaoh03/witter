@@ -6,8 +6,8 @@
     [x] Overflow of Tweet
 [x] Authentication in other file
 [x] Login/Logout/Register
-[] WeetCreate look better
-[] Profile
+[x] WeetCreate look better
+[x] Profile
 [] Comments / Likes / Reweets
 [] Privacy of weets
 [] Pagination
@@ -18,6 +18,7 @@
 
 ## [] RESPONSIVENESS!!! 
 
-###### [] Relocate all API calls to separate file
+###### [x] Relocate all API calls to separate file
 ###### [] BUTTON JS FILE?
 ###### [x] Organize icons
+###### [] Balance loading setStates

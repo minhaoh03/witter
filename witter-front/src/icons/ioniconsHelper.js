@@ -27,5 +27,6 @@ export const ioniconMap = {
 
     'comment': 'chatbubble-outline',
     'dig': 'heart-outline',
+    'digFill': 'heart',
     'reweet': 'chevron-up-outline'
 }

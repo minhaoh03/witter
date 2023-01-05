@@ -1,7 +1,7 @@
 import { Nav } from './Nav';
 import { Logo } from '../logo';
 import { WeetButton } from '../buttons'
-import { UserAuth } from '../users';
+import { UserAuth } from './UserAuth';
 
 export function NavBar(props) {
     const {user} = props

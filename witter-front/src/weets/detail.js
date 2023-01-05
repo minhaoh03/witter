@@ -1,24 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { redirect, Link } from 'react-router-dom'
 import { IonIcon } from '../icons/IonIcons'
+import { lookup } from '../backendLookup'
 
 export function Weet(props) {
-    const { content, username, first_name, last_name, profile_picture, time, reweets, comments } = props
+    const { id, content, username, first_name, last_name, profile_picture, time, } = props
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
     const profPic = domain + profile_picture
 
     const [likes, setLikes] = useState(props.likes)
+    const [reweets, setReweets] = useState(props.reweets)
+    const [comments, setComments] = useState(props.reweets)
 
-    function handleClick(e) {
-        e.preventDefault()
+    function handleComment() {
+
     }
 
-    function handleLike(e) {
-        e.preventDefault()
+    function handleReweet() {
+
+    }
+    
+    function handleDig() {
         
     }
 
     return (
-    <div className='grid grid-rows-4 grid-cols-9 rounded-lg border-[1px] border-gray-400/[0.5] m-2 w-[95%] max-h-36 h-28 min-h-24 overflow-hidden hover:bg-white/[.03] duration-200' id='weetContainer'>
+    <Link to={`/${id}`} className='grid grid-rows-4 grid-cols-9 rounded-lg border-[1px] border-gray-400/[0.5] m-2 w-[95%] max-h-36 h-28 min-h-24 overflow-hidden hover:bg-white/[.03] duration-200' id='weetContainer'>
         <div className='flex flex-col place-items-center row-start-1 row-end-4 col-start-1 col-end-2 mt-1 ml-2' id='left'>
             <div id='image' className='mt-2.5 min-w-12'>
                 <img className='shadow rounded-full align-middle border-none object-cover w-12 h-12' src={profPic} alt="profile pic" />
@@ -37,19 +44,72 @@ export function Weet(props) {
             </div>
         </div>
         <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
-            <div id='comment' className = 'flex grow text-[13px] items-center justify-center'>
+            <div id='comment' onClick={handleComment} className = 'flex grow text-[13px] items-center justify-center'>
                 <span className=''><IonIcon icon='comment' size='small'/></span>
                 <span className='ml-2 mb-1'>{comments}</span>  
             </div>
-            <div id='reweet' className = 'flex grow text-[13px] items-center justify-center'>
+            <div id='reweet' onClick={handleReweet} className = 'flex grow text-[13px] items-center justify-center'>
                 <span className=''><IonIcon icon='reweet' size='small'/></span>
                 <span className='ml-2 mb-1'>{reweets}</span>  
             </div>
-            <div id='digs' className = 'flex grow text-[13px] items-center justify-center'>
+            <div id='digs' onClick={handleDig} className = 'flex grow text-[13px] items-center justify-center'>
                 <span className=''><IonIcon icon='dig' size='small'/></span>
                 <span className='ml-2 mb-1'>{likes}</span>    
             </div>
         </div>
-    </div>
+    </Link>
     )
+}
+
+export function WeetPage(props) {
+    const [weet, setWeet] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
+    const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          // get the data from the api
+          const data = await lookup(
+            process.env.REACT_APP_BACKEND_DOMAIN,
+            `weets/api/weets/${id}`,
+            'get',
+            undefined,
+            undefined,
+            undefined,
+          )
+          setWeet(data.data)
+          setIsLoading(false)
+          console.log(data.data)
+          console.log(weet)
+          console.log(isLoading)
+        }
+        fetchData()
+      }, [isLoading])
+
+
+    if(!isLoading) {
+        return (
+            <div className='inline-block text-white'>
+                <Weet
+                    id={weet['id']}
+                    content={weet['text']}
+                    first_name={weet.user[0]['first_name']}
+                    last_name={weet.user[0]['last_name']}
+                    username={weet.user[0]['username']}
+                    profile_picture={weet.user[0]['profile_picture']}
+                    time={weet['time_ago']}
+                    likes={weet['likes']}
+                    reweets={weet['reweets']}
+                    comments={weet['comments']}
+                />
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className='inline-block text-white'>
+
+            </div>
+        )
+    }
 }
