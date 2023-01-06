@@ -43,7 +43,7 @@ class Weet(models.Model):
         User, 
         on_delete = models.CASCADE
     )
-    parent = models.ForeignKey(
+    child = models.ForeignKey(
         'self', 
         blank = True, null = True,
         on_delete = models.SET_NULL
@@ -64,7 +64,7 @@ class Weet(models.Model):
     
     @property
     def get_reweets(self):
-        return Weet.objects.filter(parent=self).count()
+        return Weet.objects.filter(child=self).count()
     
     @property
     def get_comments(self):

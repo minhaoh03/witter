@@ -30,16 +30,21 @@ class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()
     serializer_class = DigSerializer
 
-@api_view(["DELETE"])
+@api_view(["DELETE", "POST"])
 def diggedWeet(request):
     data = request.data
     user = data['user']
     weet = data['weet']
     curDig = Dig.objects.all().filter(weet = weet, user = user)
-    if curDig:
-        Dig.objects.all().filter(weet = weet, user = user).delete()
-        return JsonResponse({'deleted': True})
-    return JsonResponse({'deleted': False})
+    if request.method == "DELETE":
+        if curDig:
+            Dig.objects.all().filter(weet = weet, user = user).delete()
+            return JsonResponse({'deleted': True})
+        return JsonResponse({'deleted': False})
+    elif request.method == "POST":
+        if curDig:
+            return JsonResponse({'liked': True})
+        return JsonResponse({'liked': False})
     
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()

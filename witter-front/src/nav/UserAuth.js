@@ -5,7 +5,7 @@ export function UserAuth(props) {
     const {user} = props
     const navigate = useNavigate()
     
-    const picLink = process.env.REACT_APP_BACKEND_DOMAIN + user['profile_picture']
+    const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
 
     function handleClick() {
         return navigate('/logout')

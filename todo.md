@@ -8,7 +8,7 @@
 [x] Login/Logout/Register
 [x] WeetCreate look better
 [x] Profile
-[] Comments / Likes / Reweets
+[x] Comments / Likes / Reweets
 [] Privacy of weets
 
 ----------------------------------

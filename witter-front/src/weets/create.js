@@ -8,7 +8,7 @@ export function CreateWeet(props) {
     const textAreaRef = React.createRef()
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
 
-    const picLink = process.env.REACT_APP_BACKEND_DOMAIN + user['profile_picture']
+    const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
 
     // Creating new weet submission
     const handleSubmit = async (event) => {

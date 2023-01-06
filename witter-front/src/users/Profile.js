@@ -9,7 +9,7 @@ export function Profile() {
     const [seen, setSeen] = useState(false)
     const [user, setUser] = useOutletContext()
 
-    const picLink = process.env.REACT_APP_BACKEND_DOMAIN + user['profile_picture']
+    const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
 
     const handleSubmit = () => {
         setSeen(!seen)

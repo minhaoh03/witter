@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { lookup } from "../backendLookup"
 
 export function EditProfilePopup(props) {
-    const [pic, setPic] = useState('')
     const emailRef = React.createRef()
     const fnameRef = React.createRef()
     const lnameRef = React.createRef()
@@ -16,7 +15,8 @@ export function EditProfilePopup(props) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         let formData = new FormData()
-        formData.append('profile_picture', document.getElementById('profpicinput').files[0], 'profpic.png')
+        if(document.getElementById('profpicinput').files[0])
+            formData.append('profile_picture', document.getElementById('profpicinput').files[0], 'profpic.png')
         formData.append('email', emailRef.current.value)
         formData.append('first_name', fnameRef.current.value)
         formData.append('last_name', lnameRef.current.value)
