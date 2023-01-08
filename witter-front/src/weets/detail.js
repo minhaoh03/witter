@@ -5,6 +5,7 @@ import { lookup } from '../backendLookup'
 import { checkAuth, getUser } from '../auth'
 import { CommentBar } from '../comments'
 import { Reweet } from './Reweet'
+import { CommentFeed } from '../comments/CommentFeed'
 
 export function Weet(props) {
     const { id, content, username, user_id, first_name, last_name, profile_picture, time} = props
@@ -16,7 +17,7 @@ export function Weet(props) {
     const [likes, setLikes] = useState(props.likes)
     const [liked, setLiked] = useState(false)
     const [reweets, setReweets] = useState(props.reweets)
-    const [comments, setComments] = useState(props.reweets)
+    const [comments, setComments] = useState(props.comments)
     const [child, setChild] = useState(props.child)
 
     // useEffect(() => {
@@ -140,10 +141,10 @@ export function Weet(props) {
                     </div>
                 </div>
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
-                    <button id='comment' onClick={handleComment} className = 'flex grow text-[13px] items-center justify-center'>
+                    <div id='comment' onClick={handleComment} className = 'flex grow text-[13px] items-center justify-center'>
                         <span className=''><IonIcon icon='comment' size='small'/></span>
                         <span className='ml-2 mb-1'>{comments}</span>  
-                    </button>
+                    </div>
                     <div id='reweet' onClick={handleReweet} className = 'flex grow text-[13px] items-center justify-center '>
                         <span className=''><IonIcon icon='reweet' size='small'/></span>
                         <span className='ml-2 mb-1'>{reweets}</span>  
@@ -202,7 +203,8 @@ export function WeetPage() {
                     reweets={weet['reweets']}
                     comments={weet['comments']}
                 />
-                <CommentBar user = {user}/>
+                <CommentBar user = {user} weet={weet['id']}/>
+                <CommentFeed weet={weet['id']}/>
             </div>
         )
     }

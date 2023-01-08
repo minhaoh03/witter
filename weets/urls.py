@@ -11,6 +11,7 @@ router.register(r'comments', views.CommentViewSet, basename = 'comment')
 
 urlpatterns = [
     path('digs/digged/', views.diggedWeet, name='diggedWeet'),
+    path('comments/weetComments/', views.getWeetComments, name='weetComments'),
     path('api/', include(router.urls)),
 
 ]

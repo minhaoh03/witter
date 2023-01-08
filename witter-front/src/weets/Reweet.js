@@ -32,7 +32,7 @@ export function Reweet(props) {
     function handleWeet(e) {
         e.preventDefault()
         e.stopPropagation()
-        return navigate(`/${child}`)
+        window.location.href = `/${child}`
     }
 
     if(!isLoading) {

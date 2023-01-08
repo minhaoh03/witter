@@ -49,4 +49,13 @@ def diggedWeet(request):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+@api_view(["POST"])
+def getWeetComments(request):
+    data = request.data
+    weet = data['root_weet']
+    allComments = Comment.objects.all().filter(root_weet = weet)
+    serializer = CommentSerializer(allComments, many=True)
+    return Response(serializer.data, 200)
+    
         
