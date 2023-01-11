@@ -43,10 +43,17 @@ class Weet(models.Model):
         User, 
         on_delete = models.CASCADE
     )
+    parent = models.ForeignKey(
+        'self',
+        blank = True, null = True,
+        on_delete = models.SET_NULL,
+        related_name='childrenWeets'
+    )
     child = models.ForeignKey(
         'self', 
         blank = True, null = True,
-        on_delete = models.SET_NULL
+        on_delete = models.SET_NULL,
+        related_name='parentWeet'
     )
     privacy = models.CharField(
         choices = PRIVACY_CHOICES,
@@ -68,7 +75,7 @@ class Weet(models.Model):
     
     @property
     def get_comments(self):
-        return Comment.objects.filter(root_weet=self).count()
+        return Weet.objects.filter(parent=self).count()
     
     class Meta:
         ordering = ['-id']
@@ -86,37 +93,6 @@ class Dig(models.Model):
         blank = True, null = True,
         on_delete = models.CASCADE
     )
-    comment = models.ForeignKey(
-        'Comment',
-        blank = True, null = True,
-        on_delete = models.CASCADE
-    )
     timestamp = models.DateTimeField(
         auto_now_add = True
     )
-
-class Comment(models.Model):
-    id = models.AutoField(
-        primary_key = True
-    ) 
-    root_weet = models.ForeignKey(
-        'Weet', 
-        on_delete = models.CASCADE,
-    )
-    text = models.TextField(
-        max_length = 300,
-        blank = False, null = False
-    )
-    image = models.ImageField(
-        upload_to = 'commentimgs/',
-        blank = True, null = True
-    )
-    timestamp = models.DateTimeField(
-        auto_now_add = True,
-    )
-    user = models.ForeignKey(
-        User,
-        on_delete = models.CASCADE,
-        blank = False, null = False
-    )
-    

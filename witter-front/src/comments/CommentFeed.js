@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { lookup } from "../backendLookup"
+import { Comment } from "./Comment"
+import { Weet } from "../weets/detail"
 
 export function CommentFeed(props) {
     const {weet} = props
@@ -9,37 +11,42 @@ export function CommentFeed(props) {
         const fetchData = async () => {
             let data = await lookup(
                 process.env.REACT_APP_BACKEND_DOMAIN,
-                'weets/comments/weetComments/',
+                'weets/comments/',
                 'post',
                 {
-                    root_weet: weet,
+                    weet: weet,
                 },
                 {},
                 false
             )
-            setComments(data.data)
+            setComments(data.data.comments)
             setIsLoading(false)
         }
         fetchData()
-    })
-    return (
-        <div className="">
-            {comments.map(({ user, image, text }, index) => (
-                    <Weet
-                        key={index}
-                        content={text}
-                        user_id = {user[0]['id']}
-                        first_name={user[0]['first_name']}
-                        last_name={user[0]['last_name']}
-                        username={user[0]['username']}
-                        profile_picture={user[0]['profile_picture']}
-                        image = {image}
-                        time={time_ago}
-                        likes={likes}
-                        reweets={reweets}
-                        comments={comments}
-                    />
-            ))}
-        </div>
-    )
+    }, [isLoading])
+
+    if(comments.length !== 0) {
+        return (
+            <div className="">
+                {comments.map(({ id, text, time_ago, user, likes, reweets, comments, }, index) => (
+                        <Weet
+                            key={index}
+                            content={text}
+                            user_id = {user[0]['id']}
+                            first_name={user[0]['first_name']}
+                            last_name={user[0]['last_name']}
+                            username={user[0]['username']}
+                            profile_picture={user[0]['profile_picture']}
+                            time={time_ago}
+                            likeCount={likes}
+                            reweetCount={reweets}
+                            commentCount={comments}
+                        />
+                ))}
+            </div>
+        )
+    }
+    else {
+        return <></>
+    }
 }

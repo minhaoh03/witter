@@ -14,10 +14,9 @@ export function Weet(props) {
     let navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false)
-    const [likes, setLikes] = useState(props.likes)
-    const [liked, setLiked] = useState(false)
-    const [reweets, setReweets] = useState(props.reweets)
-    const [comments, setComments] = useState(props.comments)
+    const [likeCount, setLikeCount] = useState(props.likes)
+    const [reweetCount, setReweetCount] = useState(props.reweets)
+    const [commentCount, setCommentCount] = useState(props.comments)
     const [child, setChild] = useState(props.child)
 
     // useEffect(() => {
@@ -99,7 +98,7 @@ export function Weet(props) {
             true,
         )
         if(alrLiked.data['deleted']) {
-            setLikes(likes-1)
+            setLikeCount(likeCount-1)
         }
         else {
             await lookup(
@@ -113,7 +112,7 @@ export function Weet(props) {
                 undefined,
                 undefined,
             )
-            setLikes(likes+1)
+            setLikeCount(likeCount+1)
         }
     }
 
@@ -143,15 +142,15 @@ export function Weet(props) {
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
                     <div id='comment' onClick={handleComment} className = 'flex grow text-[13px] items-center justify-center'>
                         <span className=''><IonIcon icon='comment' size='small'/></span>
-                        <span className='ml-2 mb-1'>{comments}</span>  
+                        <span className='ml-2 mb-1'>{commentCount}</span>  
                     </div>
                     <div id='reweet' onClick={handleReweet} className = 'flex grow text-[13px] items-center justify-center '>
                         <span className=''><IonIcon icon='reweet' size='small'/></span>
-                        <span className='ml-2 mb-1'>{reweets}</span>  
+                        <span className='ml-2 mb-1'>{reweetCount}</span>  
                     </div>
                     <div id='digs' onClick={handleDig} className = 'flex grow text-[13px] items-center justify-center'>
                         <span className=''><IonIcon icon='dig' size='small'/></span>
-                        <span className='ml-2 mb-1'>{likes}</span>    
+                        <span className='ml-2 mb-1'>{likeCount}</span>    
                     </div>
                 </div>
             </div>
@@ -203,7 +202,7 @@ export function WeetPage() {
                     reweets={weet['reweets']}
                     comments={weet['comments']}
                 />
-                <CommentBar user = {user} weet={weet['id']}/>
+                <CommentBar user = {user} replyingto = {weet.user[0]['username']} weet={weet['id']}/>
                 <CommentFeed weet={weet['id']}/>
             </div>
         )

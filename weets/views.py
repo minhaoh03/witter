@@ -8,8 +8,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
 
 # py
-from .models import Weet, Dig, Comment
-from .serializers import WeetSerializer, DigSerializer, CommentSerializer
+from .models import Weet, Dig
+from .serializers import WeetSerializer, DigSerializer
 
 class WeetViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
@@ -25,6 +25,14 @@ class WeetViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=201)
         return Response({'Something went wrong'}, 404)
     
+@api_view(["POST"])
+def comments(request):
+    data = request.data
+    weet = data['weet']
+    allComments = Weet.objects.all().filter(parent=weet)
+    serializer = WeetSerializer(allComments, many=True)
+    print(serializer.data)
+    return JsonResponse({"comments" : serializer.data})
     
 class DigViewSet(viewsets.ModelViewSet):
     queryset = Dig.objects.all()
@@ -45,17 +53,3 @@ def diggedWeet(request):
         if curDig:
             return JsonResponse({'liked': True})
         return JsonResponse({'liked': False})
-    
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-@api_view(["POST"])
-def getWeetComments(request):
-    data = request.data
-    weet = data['root_weet']
-    allComments = Comment.objects.all().filter(root_weet = weet)
-    serializer = CommentSerializer(allComments, many=True)
-    return Response(serializer.data, 200)
-    
-        
