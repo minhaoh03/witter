@@ -5,11 +5,13 @@ import { lookup } from '../backendLookup';
 import { getCSRF } from '../auth';
 import { Logo } from '../logo';
 import { Link } from 'react-router-dom';
+import { AuthErrorPopup } from '../popups';
 
 export function LoginUser() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loggedin, setLoggedIn] = useState(false);
+    const [authError, setAuthError] = useState('');
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,17 +30,28 @@ export function LoginUser() {
         
         let csrf = await getCSRF()
 
-        data = await lookup(
-            process.env.REACT_APP_BACKEND_DOMAIN,
-            'users/auth/login/',
-            'post',
-            data,
-            {
-                'Content-Type': 'application/json',
-                "X-CSRFToken": csrf,
-            },
-            true
-        )
+        console.log(data)
+        
+        try {
+            data = await lookup(
+                process.env.REACT_APP_BACKEND_DOMAIN,
+                'users/auth/login/',
+                'post',
+                data,
+                {
+                    'Content-Type': 'application/json',
+                    "X-CSRFToken": csrf,
+                },
+                true
+            )
+        } catch (error) {
+            setAuthError(error.response.data.detail)
+            console.clear()
+            setTimeout(() => {
+                setAuthError('')
+            }, 5000);
+            return 
+        }
 
         setUsername('')
         setPassword('')
@@ -78,6 +91,7 @@ export function LoginUser() {
                 
             </form>
             <span className='relative text-white text-xs left-1/2 text-gray-400'> Don't have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/register' draggable="false"> Create an Account. </Link></span>
+            {authError && <AuthErrorPopup message= {authError}/>}
         </div>
     )
 }

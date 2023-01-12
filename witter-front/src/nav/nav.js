@@ -21,7 +21,7 @@ export function Nav() {
     function generateNavItem({ path, icon, text, active }, index) {
         if (text === 'More') {      // More tab, change in future
             return (
-                <span key={index} className='border-black mr-12 py-1.5 hover:bg-gray-500/50 duration-200 border-2 rounded-full'>
+                <span key={index} className='border-black mr-8 py-2.5 hover:bg-gray-500/50 duration-200 border-2 rounded-full'>
                     <NavItem
                         key={index}
                         text={text}
@@ -34,7 +34,7 @@ export function Nav() {
             return (
                 <Link
                     key={index}
-                    className='border-black mr-12 py-1.5 hover:bg-gray-500/50 duration-200 border-2 rounded-full'
+                    className='border-black mr-8 py-2.5 hover:bg-gray-500/50 duration-200 border-2 rounded-full'
                     to={path}
                     onClick={() => handleClick(text)}
                     draggable="false"

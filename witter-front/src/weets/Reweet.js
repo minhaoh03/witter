@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { lookup } from '../backendLookup'
-import { useNavigate } from 'react-router-dom'
 
 export function Reweet(props) {
-    const { child } = props
+    const { child} = props
     const [isLoading, setIsLoading] = useState(true)
     const [profPic, setProfPic] = useState('')
     const [weet, setWeet] = useState({})
-    const navigate = useNavigate()
  
     useEffect(() => {
         const fetchData = async () => {
@@ -26,13 +24,13 @@ export function Reweet(props) {
           setProfPic(link)
         }
         fetchData()
-        
+        console.log(weet)
     }, [isLoading, profPic])
 
     function handleWeet(e) {
         e.preventDefault()
         e.stopPropagation()
-        window.location.href = `/${child}`
+        window.location.href = `/${weet.user[0]['username']}/${child}`
     }
 
     if(!isLoading) {

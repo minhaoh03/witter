@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom"
 import { checkAuth } from "../auth"
 
 export function CommentBar(props) {
-    const {user, weet, replyingto} = props
+    const {user, weet, replyingto, reload, setReload} = props
     const commentRef = React.createRef()
     const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
 
@@ -28,6 +28,7 @@ export function CommentBar(props) {
             true
         )
         commentRef.current.value = ''
+        setReload(!reload)
     }
 
     return (

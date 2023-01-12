@@ -29,4 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
         if('csrfmiddlewaretoken' in final_data):
             final_data.pop('csrfmiddlewaretoken')
         
+        final_data['username'] = final_data['username'].lower()
+        
         return super(UserSerializer, self).create(final_data)

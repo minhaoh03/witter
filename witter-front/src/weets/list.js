@@ -7,6 +7,7 @@ export function WeetList(props) {
   const domain = process.env.REACT_APP_BACKEND_DOMAIN //change
   const [weets, setWeets] = useState([])
   const [reload, setReload] = useState(false)
+  const [reloadWeets, setReloadWeets] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +23,7 @@ export function WeetList(props) {
       setWeets(data.data)
     }
     fetchData()
+    console.log(weets)
   }, [reload, props.created, domain])
 
   const handleReload = (event) => {
@@ -49,6 +51,9 @@ export function WeetList(props) {
           likes={likes}
           reweets={reweets}
           comments={comments}
+          reload={reload}
+          setReload={setReload}
+          reloadWeets={reloadWeets}
         />
       ))}
     </div>

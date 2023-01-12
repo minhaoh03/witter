@@ -16,7 +16,7 @@ export function CreateWeet(props) {
         var textAreaVal = textAreaRef.current.value
         
         const finishCreate = () => {
-            props.create(created => !created)
+            props.create(!props.created)
             textAreaRef.current.value = ''
         }
         
@@ -38,7 +38,6 @@ export function CreateWeet(props) {
                 "X-CSRFToken": auth[1],
             }, 
         )
-
         finishCreate()
     }
 

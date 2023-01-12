@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { lookup } from '../backendLookup'
 import { Logo } from '../logo'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { AuthErrorPopup } from '../popups'
+import { getCSRF } from '../auth'
+
 
 export function CreateUser() {
     const emailRef = React.createRef()
@@ -11,6 +14,8 @@ export function CreateUser() {
     const lnameRef = React.createRef()
     const passwordRef = React.createRef()
     const bdayRef = React.createRef()
+
+    const [authError, setAuthError] = useState('')
 
     const navigate = useNavigate()
 
@@ -34,16 +39,52 @@ export function CreateUser() {
             bio: null,
             birth_date: bday,
         })
+        try {
+            await lookup(
+                domain,
+                'users/api/',
+                'post',
+                data,
+                {
+                    'Content-Type': 'application/json'
+                }
+            )
+        } catch (error) {
+            if(error.response.data.email)
+                setAuthError(error.response.data.email)
+            else if(error.response.data.username)
+                setAuthError(error.response.data.username)
+            console.clear()
+            setTimeout(() => {
+                setAuthError('')
+            }, 5000);
+            console.log(error)
+            return 
+        }
 
-        await lookup(
-            domain,
-            'users/api/',
+        let csrf = await getCSRF()
+
+        data = JSON.stringify({
+            password: password,
+            username: un,
+        })
+
+        console.log(data)
+        
+        data = await lookup(
+            process.env.REACT_APP_BACKEND_DOMAIN,
+            'users/auth/login/',
             'post',
             data,
             {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrf,
+            },
+            true
         )
+
+        localStorage.setItem('token', data.data.Authentication)
+
         navigate('/home')
     }
 
@@ -90,6 +131,7 @@ export function CreateUser() {
             </form>
 
             <span className='absolute text-gray-400 right-[52%] text-xs pt-2'>Already have an account? <Link className='text-yellow-300 underline underline-offset-2' to='/login' draggable="false">Sign in.</Link></span>
+            {authError && <AuthErrorPopup message= {authError}/>}
         </div>
     )
 }

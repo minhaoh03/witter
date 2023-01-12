@@ -6,7 +6,7 @@ import { WeetFeed, WeetPage } from './weets'
 import { CreateUser, LoginUser, LogoutUser, JoinUser } from './users'
 import { NavBar } from './nav'
 import { SocialBar } from './socials'
-import { Profile } from './users';
+import { Profile, UserPage } from './users';
 import { getUser } from './auth';
 
 const HeaderLayout = () => {
@@ -60,9 +60,13 @@ const router = Router([
         element: <Profile />,
       },
       {
-        path: "/:weetID",
+        path: "/:username",
+        element: <UserPage />,
+      },
+      {
+        path: "/:username/:weetID",
         element: <WeetPage />,
-      }
+      },
     ],
   }, {
     path: "/welcome",

@@ -8,7 +8,7 @@ import { Reweet } from './Reweet'
 import { CommentFeed } from '../comments/CommentFeed'
 
 export function Weet(props) {
-    const { id, content, username, user_id, first_name, last_name, profile_picture, time} = props
+    const { id, content, username, user_id, first_name, last_name, profile_picture, time, reload, setReload} = props
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
     const profPic = process.env.REACT_APP_MEDIA_DOMAIN + profile_picture
     let navigate = useNavigate();
@@ -48,10 +48,10 @@ export function Weet(props) {
 
     function handleWeet(e) {
         e.preventDefault()
-        return navigate(`/${id}`)
+        return navigate(`/${username}/${id}`)
     }
 
-    async function handleComment(e) {
+    async function handleComment(e) {       //make popup
         e.stopPropagation()
         const user = await getUser()
         const auth = await checkAuth()
@@ -78,6 +78,9 @@ export function Weet(props) {
             }, 
             true
         )
+        setReweetCount(reweetCount+1)
+        setChild(id)
+        setReload(!reload)
     }
     
     async function handleDig(e) {
@@ -140,30 +143,35 @@ export function Weet(props) {
                     </div>
                 </div>
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
-                    <div id='comment' onClick={handleComment} className = 'flex grow text-[13px] items-center justify-center'>
-                        <span className=''><IonIcon icon='comment' size='small'/></span>
-                        <span className='ml-2 mb-1'>{commentCount}</span>  
+                    <div id='comment'  className = 'flex grow text-[13px] justify-center'>
+                        <div onClick={handleComment} className='flex p-1 h-[50%]'>
+                            <span className=''><IonIcon icon='comment' size='small'/></span>
+                            <span className='ml-2 mb-1'>{commentCount}</span>  
+                        </div>
                     </div>
-                    <div id='reweet' onClick={handleReweet} className = 'flex grow text-[13px] items-center justify-center '>
-                        <span className=''><IonIcon icon='reweet' size='small'/></span>
-                        <span className='ml-2 mb-1'>{reweetCount}</span>  
+                    <div id='reweet'  className = 'flex grow text-[13px] justify-center '>
+                        <div onClick={handleReweet} className='flex p-1 h-[50%]'>
+                            <span className=''><IonIcon icon='reweet' size='small'/></span>
+                            <span className='ml-2 mb-1'>{reweetCount}</span>
+                        </div>
                     </div>
-                    <div id='digs' onClick={handleDig} className = 'flex grow text-[13px] items-center justify-center'>
-                        <span className=''><IonIcon icon='dig' size='small'/></span>
-                        <span className='ml-2 mb-1'>{likeCount}</span>    
+                    <div id='digs' className = 'flex grow text-[13px] justify-center'>
+                        <div onClick={handleDig} className='flex p-1 h-[50%]'>
+                            <span className=''><IonIcon icon='dig' size='small'/></span>
+                            <span className='ml-2 mb-1'>{likeCount}</span>  
+                        </div> 
                     </div>
                 </div>
             </div>
         )
     }
     return <div className='text-white'>Loading...</div>
-    
-    
 }
 
 export function WeetPage() {
     const [weet, setWeet] = useState({})
     const [isLoading, setIsLoading] = useState(true)
+    const [reload, setReload] = useState(false)
     const [user, setUser] = useOutletContext()
     const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 
@@ -182,7 +190,7 @@ export function WeetPage() {
           setIsLoading(false)
         }
         fetchData()
-      }, [isLoading])
+      }, [isLoading, reload])
 
 
     if(!isLoading) {
@@ -202,8 +210,8 @@ export function WeetPage() {
                     reweets={weet['reweets']}
                     comments={weet['comments']}
                 />
-                <CommentBar user = {user} replyingto = {weet.user[0]['username']} weet={weet['id']}/>
-                <CommentFeed weet={weet['id']}/>
+                <CommentBar user = {user} replyingto = {weet.user[0]['username']} weet={weet['id']} reload={reload} setReload={setReload}/>
+                <CommentFeed weet={weet['id']} reload={reload}/>
             </div>
         )
     }

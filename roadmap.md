@@ -8,25 +8,25 @@ https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-
     [] Privacy of weet
         - Global v. Personal
     [] Content of weet
-        - Text
-        - Images
-        - Timestamp
-    [] Dig
+        [x] Text
+        [] Images
+        [x] Timestamp
+    [x] Dig
         - Users may "dig" weets
-    [] Reweet
+    [x] Reweet
         - Users can "reweet" weets to show from their profiles
-    [] Comments
+    [x] Comments
         - Users can comment on another weet
 
 ## Users
-    [] Username
-    [] Information
+    [x] Username
+    [x] Information
         - First and Last name
         - Bio
         - Location
         - Join Date
         - Birth Date
-    [] Profile Picture
+    [x] Profile Picture
     [] Privacy
         - Private v. Public account
     [] Blocking
@@ -58,8 +58,8 @@ https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-
     [] Customize
 
 ## Pages
-    [] Profile
-    [] Weet Page
+    [x] Profile
+    [x] Weet Page
 
 ## Implementation
     [] Privacy

@@ -19,14 +19,13 @@
 
 ###### [] BUTTON JS FILE?
 
-[] Like system, remove like, add like, icon
-[] Fix link
-[] Change profile picture
-[] Commenting system, add comments and numbers under the weet individual
-[] Reweet system, make reweets under the feed, individual component
+[x] Like system, remove like, add like, icon
+[x] Fix link
+[x] Change profile picture
+[x] Commenting system, add comments and numbers under the weet individual
+[x] Reweet system, make reweets under the feed, individual component
 [] Have individual feeds, follow, and unfollow
 
-LATER
 [] Organize all code (DO THIS)
 #   [] Balance loading setStates
 [] Pagination

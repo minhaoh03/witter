@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { lookup } from "../backendLookup"
-import { Comment } from "./Comment"
 import { Weet } from "../weets/detail"
 
 export function CommentFeed(props) {
-    const {weet} = props
+    const {weet, reload} = props
     const [isLoading, setIsLoading] = useState(true)
     const [comments, setComments] = useState([])
     useEffect(() => {
@@ -23,7 +22,7 @@ export function CommentFeed(props) {
             setIsLoading(false)
         }
         fetchData()
-    }, [isLoading])
+    }, [isLoading, reload])
 
     if(comments.length !== 0) {
         return (
