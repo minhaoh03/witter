@@ -36,7 +36,6 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(instance, data = data, partial=True)
         if serializer.is_valid():
             serializer.save()
-        print(serializer.errors)
         return Response(serializer.data)
     
     def get_user(id_):

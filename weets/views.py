@@ -31,7 +31,6 @@ def comments(request):
     weet = data['weet']
     allComments = Weet.objects.all().filter(parent=weet)
     serializer = WeetSerializer(allComments, many=True)
-    print(serializer.data)
     return JsonResponse({"comments" : serializer.data})
     
 class DigViewSet(viewsets.ModelViewSet):

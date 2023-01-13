@@ -8,7 +8,7 @@ import { Reweet } from './Reweet'
 import { CommentFeed } from '../comments/CommentFeed'
 
 export function Weet(props) {
-    const { id, content, username, user_id, first_name, last_name, profile_picture, time, reload, setReload} = props
+    const { id, content, username, user_id, first_name, last_name, profile_picture, time, parent, reload, setReload} = props
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
     const profPic = process.env.REACT_APP_MEDIA_DOMAIN + profile_picture
     let navigate = useNavigate();
@@ -130,18 +130,22 @@ export function Weet(props) {
                         {time}
                     </div>
                 </div>
-                <div id='right' className = 'flex flex-col row-start-1 row-end-4 col-span-7 mt-2 ml-2'>
-                    <div id = 'id' className = 'flex flex-col text-sm antialiased' >
+                
+                <div id='right' className = 'flex flex-col row-start-1 row-end-4 col-start-2 col-end-8 mt-2 ml-2'>
+                    <div id = 'id' className = 'flex flex-col text-sm antialiased' >  
+                        
                         <span className='text-gray-500'>@{username}</span>
                         <span className = 'font-semibold text-white'>{first_name} {last_name}</span>
-                    </div>
-                    <div className='text-white'>
                     </div>
                     <div id='content' className='text-sm break-words h-fit overflow-visible justify-items-center text-white'>
                         {child && <Reweet child={child}/>}
                         {content}
                     </div>
                 </div>
+                <div className='flex row-start-1 row-end-4 col-start-8 col-end-10'>
+                    {parent && <span className='mt-2 ml-6 text-gray-400 text-xs'>{username} commented</span>}
+                </div>
+                
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
                     <div id='comment'  className = 'flex grow text-[13px] justify-center'>
                         <div onClick={handleComment} className='flex p-1 h-[50%]'>
@@ -190,6 +194,7 @@ export function WeetPage() {
           setIsLoading(false)
         }
         fetchData()
+        console.log('checking page')
       }, [isLoading, reload])
 
 

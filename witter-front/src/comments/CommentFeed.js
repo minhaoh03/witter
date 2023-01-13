@@ -6,6 +6,7 @@ export function CommentFeed(props) {
     const {weet, reload} = props
     const [isLoading, setIsLoading] = useState(true)
     const [comments, setComments] = useState([])
+    const [reloadFeed, setReloadFeed] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             let data = await lookup(
@@ -20,6 +21,7 @@ export function CommentFeed(props) {
             )
             setComments(data.data.comments)
             setIsLoading(false)
+            console.log('hello')
         }
         fetchData()
     }, [isLoading, reload])
@@ -27,9 +29,10 @@ export function CommentFeed(props) {
     if(comments.length !== 0) {
         return (
             <div className="">
-                {comments.map(({ id, text, time_ago, user, likes, reweets, comments, }, index) => (
+                {comments.map(({ id, text, time_ago, user, likes, reweets, comments }) => (
                         <Weet
-                            key={index}
+                            key={id}
+                            id={id}
                             content={text}
                             user_id = {user[0]['id']}
                             first_name={user[0]['first_name']}
@@ -37,9 +40,11 @@ export function CommentFeed(props) {
                             username={user[0]['username']}
                             profile_picture={user[0]['profile_picture']}
                             time={time_ago}
-                            likeCount={likes}
-                            reweetCount={reweets}
-                            commentCount={comments}
+                            likes={likes}
+                            reweets={reweets}
+                            comments={comments}
+                            setReload={setReloadFeed}
+                            reload={reloadFeed}
                         />
                 ))}
             </div>

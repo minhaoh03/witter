@@ -17,6 +17,7 @@ export function CreateWeet(props) {
         
         const finishCreate = () => {
             props.create(!props.created)
+            console.log('hello')
             textAreaRef.current.value = ''
         }
         

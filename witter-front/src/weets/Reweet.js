@@ -24,7 +24,6 @@ export function Reweet(props) {
           setProfPic(link)
         }
         fetchData()
-        console.log(weet)
     }, [isLoading, profPic])
 
     function handleWeet(e) {

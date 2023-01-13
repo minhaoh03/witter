@@ -20,11 +20,12 @@ export function WeetList(props) {
         undefined,
         undefined,
       )
-      setWeets(data.data)
+      const list = data.data
+      setWeets(list)
+      console.log(list)
     }
     fetchData()
-    console.log(weets)
-  }, [reload, props.created, domain])
+  }, [reload, props.created])
 
   const handleReload = (event) => {
     event.preventDefault()
@@ -36,9 +37,9 @@ export function WeetList(props) {
       <form className='w-full'onSubmit={handleReload}>
         <button className="text-yellow-300 text-sm border-b-[1px] w-full border-gray-400/50 pb-2 hover:bg-white/[.03]" type='submit' onSubmit={handleReload}>Show New Weets</button>
       </form>
-      {weets.map(({ id, text, time_ago, user, likes, reweets, comments, child }, index) => (
+      {weets.map(({ id, text, time_ago, user, likes, reweets, comments, parent, child }) => (
         <Weet
-          key={index}
+          key={id}
           id={id}
           content={text}
           child={child}
@@ -48,6 +49,7 @@ export function WeetList(props) {
           username={user[0]['username']}
           profile_picture={user[0]['profile_picture']}
           time={time_ago}
+          parent={parent}
           likes={likes}
           reweets={reweets}
           comments={comments}
