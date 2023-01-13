@@ -21,10 +21,9 @@ export function CommentFeed(props) {
             )
             setComments(data.data.comments)
             setIsLoading(false)
-            console.log('hello')
         }
         fetchData()
-    }, [isLoading, reload])
+    }, [isLoading, reloadFeed, reload])
 
     if(comments.length !== 0) {
         return (

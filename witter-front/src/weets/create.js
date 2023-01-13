@@ -2,6 +2,7 @@
 import React from 'react'
 import { checkAuth } from '../auth';
 import { lookup } from '../backendLookup';
+import { IonIcon } from '../icons';
 
 export function CreateWeet(props) {
     const {user} = props
@@ -17,7 +18,6 @@ export function CreateWeet(props) {
         
         const finishCreate = () => {
             props.create(!props.created)
-            console.log('hello')
             textAreaRef.current.value = ''
         }
         
@@ -45,7 +45,7 @@ export function CreateWeet(props) {
     // Return
     return (
         <div className='font-roboto bg-black'>
-            <form onSubmit={handleSubmit} className = 'flex flex-col border-b-[1px] border-gray-400/[0.5] mb-2 min-h-[100px]'>
+            <div className = 'flex flex-col border-b-[1px] border-gray-400/[0.5] mb-2 min-h-[100px]'>
                 <div className='flex'>
                     <span className='ml-2'><img src={picLink} className='shadow m-1 rounded-full border-none object-cover w-12 h-12' alt='profile pic'></img></span>
                     <textarea className='
@@ -53,9 +53,11 @@ export function CreateWeet(props) {
                         ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
                     </textarea>
                 </div>
-                
-                <button className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] self-end mb-2 mr-5 hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
-            </form>
+                <div className='flex'>
+                    <span><IonIcon icon='image' size='small'/></span>
+                    <button onClick={handleSubmit} className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] align-self-end mb-2 mr-5 hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
+                </div>
+            </div>
         </div>
     )
 }

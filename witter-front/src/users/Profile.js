@@ -25,13 +25,13 @@ export function Profile() {
                 </div>
             </div>
             <div className="flex flex-col w-full h-screen">
-                <div className="h-[27%] bg-gradient-to-r from-orange-500 to-yellow-300 border-b-[1px] border-gray-400/[0.5]">
+                <div className="h-[30%] bg-gradient-to-r from-orange-500 to-yellow-300 border-b-[1px] border-gray-400/[0.5]">
                     
                 </div>
                 <div className="mt-[-15%]">
                     <img src={picLink} className='shadow m-4 rounded-full border-black border-4 object-cover w-32 h-32'></img>
                     <div className="">
-                        <button onClick={handleSubmit} className='py-1 px-3 mr-5 mt-[-10%] text-sm float-right font-bold shadow bg-transparent border-[1px] border-white/50 rounded-full hover:bg-white/[0.1] duration-150'>Edit profile</button>
+                        <button onClick={handleSubmit} className='relative py-1 px-3 mr-5 mt-[-8%] text-sm float-right font-bold shadow bg-transparent border-[1px] border-white/50 rounded-full hover:bg-white/[0.1] duration-150'>Edit profile</button>
                     </div>
                 </div>
                 

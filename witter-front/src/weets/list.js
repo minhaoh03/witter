@@ -22,7 +22,6 @@ export function WeetList(props) {
       )
       const list = data.data
       setWeets(list)
-      console.log(list)
     }
     fetchData()
   }, [reload, props.created])

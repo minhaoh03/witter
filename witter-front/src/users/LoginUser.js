@@ -29,8 +29,6 @@ export function LoginUser() {
         })
         
         let csrf = await getCSRF()
-
-        console.log(data)
         
         try {
             data = await lookup(

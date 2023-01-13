@@ -41,10 +41,10 @@ export function EditProfilePopup(props) {
     return (
         <div className='absolute w-[100%] h-full ml-[-30%] bg-white/25 z-20 text-white'>
             <div className='relative ml-[35%] mt-[7%] rounded-xl bg-black w-[30%] h-[65vh] overflow-y-scroll overflow-x-hidden'>
-                <div className='sticky flex top-0 rounded-t-xl bg-black/75 h-[6vh] w-full border-b-[1px] border-gray-400/[0.5] pb-2'>
-                    <button onClick={handleClick} className="relative ml-[2%] mt-[1vh]">X</button>
-                    <span className="relative font-bold text-lg ml-[5%] mt-[1vh]"> Edit profile </span>
-                    <form><button onClick={handleSubmit} className='absolute rounded-full px-3 py-1 bg-white text-black font-semibold text-sm ml-[50%] mt-[2%] hover:bg-white/[.95] duration-150'>Save</button></form>
+                <div className='sticky top-0 rounded-t-xl bg-black/75 h-[6vh] w-full border-b-[1px] border-gray-400/[0.5] pb-2'>
+                    <button onClick={handleClick} className="relative ml-[2%] mt-[2vh]">X</button>
+                    <span className="relative font-bold text-lg ml-[5%] mt-[1.5vh]"> Edit profile </span>
+                    <form className="float-right mt-3 mr-3"><button onClick={handleSubmit} className='rounded-full px-3 py-1 bg-white text-black font-semibold text-sm hover:bg-white/[.95] duration-150'>Save</button></form>
                 </div>
                 <div className="flex flex-col mx-[5%] w-[90%]">
                     <div className='flex flex-col self-center h-full w-full'>

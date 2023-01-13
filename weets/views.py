@@ -19,7 +19,12 @@ class WeetViewSet(viewsets.ModelViewSet):
     def create(self, request):
         data = request.data.copy()
         data['user'] = request.user.id
+        print(data)
         serializer = WeetSerializer(data=data)
+        if 'child' in data:
+            hasChild = Weet.objects.all().filter(user=data['user'], child=data['child'])
+            if hasChild:
+                return Response({'You already reweeted this'}, 404)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=201)
@@ -52,3 +57,19 @@ def diggedWeet(request):
         if curDig:
             return JsonResponse({'liked': True})
         return JsonResponse({'liked': False})
+
+@api_view(["DELETE", "POST"])
+def reweetedWeet(request):
+    data = request.data
+    user = data['user']
+    weet = data['child']
+    curWeet = Weet.objects.all().filter(child = weet, user = user)
+    if request.method == "DELETE":
+        if curWeet:
+            Weet.objects.all().filter(child = weet, user = user).delete()
+            return JsonResponse({'deleted': True})
+        return JsonResponse({'deleted': False})
+    elif request.method == "POST":
+        if curWeet:
+            return JsonResponse({'reweeted': True})
+        return JsonResponse({'reweeted': False})

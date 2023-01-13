@@ -1,12 +1,8 @@
 ##### I am slowly going insane #####
 
-- Comments need like, reweet, and stuff
+- Be able to post images
 
-- Must only be able to reweet once
-
-- Quote reweet vs normal reweet
-
-- Show that user liked, reweeted a weet (color n stuff)
+- Type text for each reweet
 
 - Make profile
 
@@ -14,6 +10,8 @@
     AKA should show the line connecting to main tweet (harder to do)
 
 - Make individual feeds
+
+- Reweet vs bump
 
 - Different screen size problems
 

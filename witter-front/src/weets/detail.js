@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { IonIcon } from '../icons/IonIcons'
 import { lookup } from '../backendLookup'
@@ -14,37 +14,63 @@ export function Weet(props) {
     let navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false)
+    const [liked, setLiked] = useState(false)
+    const [reweeted, setReweeted] = useState(false)
     const [likeCount, setLikeCount] = useState(props.likes)
     const [reweetCount, setReweetCount] = useState(props.reweets)
     const [commentCount, setCommentCount] = useState(props.comments)
     const [child, setChild] = useState(props.child)
 
-    // useEffect(() => {
-    //     const getLiked = async () => {
-    //         const user = await getUser()
-    //         const auth = await checkAuth()
-    //         const alrLiked = await lookup(
-    //                             process.env.REACT_APP_BACKEND_DOMAIN,
-    //                             'weets/digs/digged/',
-    //                             'post',
-    //                             {
-    //                                 user: user['id'],
-    //                                 weet: id,
-    //                             },
-    //                             {
-    //                                 "X-CSRFToken": auth[1],
-    //                             },
-    //                             true,
-    //                         )
-    //         if(alrLiked.data['liked']) {
-    //             setLiked(true)
-    //         } else {
-    //             setLiked(false)
-    //         }
-    //     }
-    //     getLiked()
-    //     setIsLoading(false)
-    // }, [isLoading])
+    useEffect(() => {
+        const getLiked = async () => {
+            const user = await getUser()
+            const auth = await checkAuth()
+            const alrLiked = await lookup(
+                                process.env.REACT_APP_BACKEND_DOMAIN,
+                                'weets/digs/digged/',
+                                'post',
+                                {
+                                    user: user['id'],
+                                    weet: id,
+                                },
+                                {
+                                    "X-CSRFToken": auth[1],
+                                },
+                                true,
+                            )
+            if(alrLiked.data['liked']) {
+                setLiked(true)
+            } else {
+                setLiked(false)
+            }
+        }
+
+        const getReweet = async () => {
+            const user = await getUser()
+            const auth = await checkAuth()
+            const alrReweeted = await lookup(
+                process.env.REACT_APP_BACKEND_DOMAIN,
+                'weets/weets/reweeted/',
+                'post',
+                {
+                    user: user['id'],
+                    child: id,
+                },
+                {
+                    "X-CSRFToken": auth[1],
+                },
+                true,
+            )
+            if(alrReweeted.data['reweeted']) {
+                setReweeted(true)
+            } else {
+                setReweeted(false)
+            }
+        }
+        getLiked()
+        getReweet()
+        setIsLoading(false)
+    }, [isLoading, liked, reweeted])
 
     function handleWeet(e) {
         e.preventDefault()
@@ -61,25 +87,43 @@ export function Weet(props) {
         e.stopPropagation()
         const user = await getUser()
         const auth = await checkAuth()
-        await lookup(
-            domain, 
-            'weets/api/weets/', 
-            'post', 
-            {
-                text: '', 
-                image: null, 
-                privacy: 'public', //change privacy
-                child: id
-            }, 
-            {
-                'Content-Type': 'application/json',
-                'Authorization' : auth[0],
-                "X-CSRFToken": auth[1],
-            }, 
-            true
-        )
-        setReweetCount(reweetCount+1)
-        setChild(id)
+        try {
+            await lookup(
+                domain, 
+                'weets/api/weets/', 
+                'post', 
+                {
+                    text: '', 
+                    image: null, 
+                    privacy: 'public', //change privacy
+                    child: id
+                }, 
+                {
+                    'Content-Type': 'application/json',
+                    'Authorization' : auth[0],
+                    "X-CSRFToken": auth[1],
+                }, 
+                true
+            )
+            setReweetCount(reweetCount+1)
+        }
+        catch(e) {              // Decrement if pressed again
+            const alrReweeted = await lookup(
+                process.env.REACT_APP_BACKEND_DOMAIN,
+                'weets/weets/reweeted/',
+                'delete',
+                {
+                    user: user['id'],
+                    child: id,
+                },
+                {
+                    "X-CSRFToken": auth[1],
+                },
+                true,
+            )
+            setReweetCount(reweetCount-1)
+        }
+        setReweeted(!reweeted)
         setReload(!reload)
     }
     
@@ -117,6 +161,7 @@ export function Weet(props) {
             )
             setLikeCount(likeCount+1)
         }
+        setLiked(!liked)
     }
 
     if(!isLoading) {
@@ -143,26 +188,30 @@ export function Weet(props) {
                     </div>
                 </div>
                 <div className='flex row-start-1 row-end-4 col-start-8 col-end-10'>
-                    {parent && <span className='mt-2 ml-6 text-gray-400 text-xs'>{username} commented</span>}
+                    {parent && <span className='mt-2 ml-4 text-gray-400 text-xs'>@{username} commented</span>}
                 </div>
                 
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
-                    <div id='comment'  className = 'flex grow text-[13px] justify-center'>
+                    <div className = 'flex grow text-[13px] justify-center'>
                         <div onClick={handleComment} className='flex p-1 h-[50%]'>
                             <span className=''><IonIcon icon='comment' size='small'/></span>
                             <span className='ml-2 mb-1'>{commentCount}</span>  
                         </div>
                     </div>
-                    <div id='reweet'  className = 'flex grow text-[13px] justify-center '>
+                    <div className = 'flex grow text-[13px] justify-center '>
                         <div onClick={handleReweet} className='flex p-1 h-[50%]'>
-                            <span className=''><IonIcon icon='reweet' size='small'/></span>
-                            <span className='ml-2 mb-1'>{reweetCount}</span>
+                            {reweeted && <span className='text-purple-300'><IonIcon icon='reweet' size='small'/></span>}
+                            {reweeted && <span className='ml-2 mb-1 text-purple-300'>{reweetCount}</span>}
+                            {!reweeted && <span className=''><IonIcon icon='reweet' size='small'/></span>}
+                            {!reweeted && <span className='ml-2 mb-1'>{reweetCount}</span>}
                         </div>
                     </div>
-                    <div id='digs' className = 'flex grow text-[13px] justify-center'>
+                    <div className = 'flex grow text-[13px] justify-center'>
                         <div onClick={handleDig} className='flex p-1 h-[50%]'>
-                            <span className=''><IonIcon icon='dig' size='small'/></span>
-                            <span className='ml-2 mb-1'>{likeCount}</span>  
+                            {liked && <span className='animate-bounce text-yellow-300'><IonIcon icon='digFill' size='small'/></span>}
+                            {liked && <span className='ml-2 mb-1 text-yellow-300'>{likeCount}</span>}
+                            {!liked && <span className=''><IonIcon icon='dig' size='small'/></span>}
+                            {!liked && <span className='ml-2 mb-1'>{likeCount}</span>}
                         </div> 
                     </div>
                 </div>
@@ -171,6 +220,23 @@ export function Weet(props) {
     }
     return <div className='text-white'>Loading...</div>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function WeetPage() {
     const [weet, setWeet] = useState({})
@@ -194,7 +260,6 @@ export function WeetPage() {
           setIsLoading(false)
         }
         fetchData()
-        console.log('checking page')
       }, [isLoading, reload])
 
 
@@ -214,6 +279,8 @@ export function WeetPage() {
                     likes={weet['likes']}
                     reweets={weet['reweets']}
                     comments={weet['comments']}
+                    reload={reload}
+                    setReload={setReload}
                 />
                 <CommentBar user = {user} replyingto = {weet.user[0]['username']} weet={weet['id']} reload={reload} setReload={setReload}/>
                 <CommentFeed weet={weet['id']} reload={reload}/>

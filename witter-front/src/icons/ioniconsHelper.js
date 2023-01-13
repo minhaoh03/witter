@@ -28,5 +28,8 @@ export const ioniconMap = {
     'comment': 'chatbubble-outline',
     'dig': 'heart-outline',
     'digFill': 'heart',
-    'reweet': 'chevron-up-outline'
+    'reweet': 'chevron-up-outline',
+
+    //Create Weet
+    'image': 'image-outline',
 }
