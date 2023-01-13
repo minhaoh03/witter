@@ -1,7 +1,5 @@
 ##### I am slowly going insane #####
 
-- Be able to post images
-
 - Type text for each reweet
 
 - Make profile

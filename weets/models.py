@@ -34,7 +34,7 @@ class Weet(models.Model):
     )
     image = models.ImageField(
         blank = True, null = True,
-        upload_to = 'images/', 
+        upload_to = (''),
     )
     timestamp = models.DateTimeField(
         auto_now_add = True

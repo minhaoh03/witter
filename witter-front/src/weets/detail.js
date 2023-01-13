@@ -8,7 +8,7 @@ import { Reweet } from './Reweet'
 import { CommentFeed } from '../comments/CommentFeed'
 
 export function Weet(props) {
-    const { id, content, username, user_id, first_name, last_name, profile_picture, time, parent, reload, setReload} = props
+    const { id, content, username, user_id, image, first_name, last_name, profile_picture, time, parent, reload, setReload} = props
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
     const profPic = process.env.REACT_APP_MEDIA_DOMAIN + profile_picture
     let navigate = useNavigate();
@@ -183,8 +183,10 @@ export function Weet(props) {
                         <span className = 'font-semibold text-white'>{first_name} {last_name}</span>
                     </div>
                     <div id='content' className='text-sm break-words h-fit overflow-visible justify-items-center text-white'>
+                        
                         {child && <Reweet child={child}/>}
-                        {content}
+                        {image && <img src={image}/>}
+                        <span className=''>{content}</span>
                     </div>
                 </div>
                 <div className='flex row-start-1 row-end-4 col-start-8 col-end-10'>
@@ -192,13 +194,13 @@ export function Weet(props) {
                 </div>
                 
                 <div id='bottom' className = 'flex row-start-4 row-end-5 col-start-1 col-end-10 text-gray-500'>
-                    <div className = 'flex grow text-[13px] justify-center'>
+                    <div className = 'flex grow text-[13px] justify-center items-end mb-3'>
                         <div onClick={handleComment} className='flex p-1 h-[50%]'>
                             <span className=''><IonIcon icon='comment' size='small'/></span>
                             <span className='ml-2 mb-1'>{commentCount}</span>  
                         </div>
                     </div>
-                    <div className = 'flex grow text-[13px] justify-center '>
+                    <div className = 'flex grow text-[13px] justify-center items-end mb-3'>
                         <div onClick={handleReweet} className='flex p-1 h-[50%]'>
                             {reweeted && <span className='text-purple-300'><IonIcon icon='reweet' size='small'/></span>}
                             {reweeted && <span className='ml-2 mb-1 text-purple-300'>{reweetCount}</span>}
@@ -206,7 +208,7 @@ export function Weet(props) {
                             {!reweeted && <span className='ml-2 mb-1'>{reweetCount}</span>}
                         </div>
                     </div>
-                    <div className = 'flex grow text-[13px] justify-center'>
+                    <div className = 'flex grow text-[13px] justify-center items-end mb-3'>
                         <div onClick={handleDig} className='flex p-1 h-[50%]'>
                             {liked && <span className='animate-bounce text-yellow-300'><IonIcon icon='digFill' size='small'/></span>}
                             {liked && <span className='ml-2 mb-1 text-yellow-300'>{likeCount}</span>}
@@ -276,6 +278,7 @@ export function WeetPage() {
                     username={weet.user[0]['username']}
                     profile_picture={weet.user[0]['profile_picture']}
                     time={weet['time_ago']}
+                    image={weet['image']}
                     likes={weet['likes']}
                     reweets={weet['reweets']}
                     comments={weet['comments']}

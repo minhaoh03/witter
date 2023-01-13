@@ -23,18 +23,18 @@ export function CreateWeet(props) {
         
         let auth = await checkAuth()
 
+        let data = new FormData()
+        if(document.getElementById('image').files[0])
+            data.append('image', document.getElementById('image').files[0], 'image.png')
+        data.append('text', textAreaVal)
+        data.append('privacy', 'public')
+
         await lookup(
             domain, 
             'weets/api/weets/', 
             'post', 
+            data,
             {
-                text: textAreaVal, 
-                image: null, 
-                privacy: 'public', //change privacy
-                parent: null
-            }, 
-            {
-                'Content-Type': 'application/json',
                 'Authorization' : auth[0],
                 "X-CSRFToken": auth[1],
             }, 
@@ -42,7 +42,12 @@ export function CreateWeet(props) {
         finishCreate()
     }
 
-    // Return
+    const chooseImage = (event) => {
+        event.preventDefault()
+        document.getElementById("image").click();
+    }
+
+
     return (
         <div className='font-roboto bg-black'>
             <div className = 'flex flex-col border-b-[1px] border-gray-400/[0.5] mb-2 min-h-[100px]'>
@@ -53,10 +58,14 @@ export function CreateWeet(props) {
                         ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
                     </textarea>
                 </div>
-                <div className='flex'>
-                    <span><IonIcon icon='image' size='small'/></span>
-                    <button onClick={handleSubmit} className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] align-self-end mb-2 mr-5 hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
+                <div className='w-full h-full py-3'>
+                    <div className='flex ml-20 justify-start h-full'>
+                        <input id='image' accept="image/jpeg,image/png" type='file' className='h-0 overflow-hidden'/>
+                        <span className='text-gray-300' onClick={chooseImage}><IonIcon icon='image'/></span>
+                    </div>
+                    <button onClick={handleSubmit} className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] float-right mr-5 self-center justify-self-center hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
                 </div>
+                
             </div>
         </div>
     )
