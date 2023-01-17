@@ -1,10 +1,12 @@
 import React, { useState, useEffect, } from 'react'
 
-import { Weet } from './detail'
+import { Weet } from './Weet'
 import { lookup } from '../backendLookup'
 
 export function WeetList(props) {
-  const domain = process.env.REACT_APP_BACKEND_DOMAIN //change
+  const {reweetPopup} = props
+  
+  const domain = process.env.REACT_APP_BACKEND_DOMAIN 
   const [weets, setWeets] = useState([])
   const [reload, setReload] = useState(false)
   const [reloadWeets, setReloadWeets] = useState(false)
@@ -56,6 +58,7 @@ export function WeetList(props) {
           reload={reload}
           setReload={setReload}
           reloadWeets={reloadWeets}
+          reweetPopup={reweetPopup}
         />
       ))}
     </div>

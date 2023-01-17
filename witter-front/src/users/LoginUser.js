@@ -44,7 +44,6 @@ export function LoginUser() {
             )
         } catch (error) {
             setAuthError(error.response.data.detail)
-            console.clear()
             setTimeout(() => {
                 setAuthError('')
             }, 5000);

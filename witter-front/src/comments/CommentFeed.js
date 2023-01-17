@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { lookup } from "../backendLookup"
-import { Weet } from "../weets/detail"
+import { Weet } from "../weets/Weet"
 
 export function CommentFeed(props) {
     const {weet, reload} = props

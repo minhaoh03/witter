@@ -1,8 +1,7 @@
-import {WeetList} from "./list";
-import {Weet} from './detail';
-import {CreateWeet} from "./create";
-import {WeetFeed} from "./components"
-import { WeetPage } from "./detail";
+import {WeetList} from "./WeetList";
+import { Weet, WeetPage } from './Weet';
+import {CreateWeet} from "./CreateWeet";
+import { WeetFeed } from "./WeetComponents"
 import { Reweet } from "./Reweet";
 
 export {

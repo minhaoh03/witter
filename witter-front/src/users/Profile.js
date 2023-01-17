@@ -1,11 +1,9 @@
 import { checkAuth } from "../auth"
 import { useOutletContext } from "react-router-dom"
 import { useState } from "react"
-import { EditProfilePopup } from "./EditProfPopup"
+import { EditProfilePopup } from "../popups"
 
 export function Profile() {
-    const auth = checkAuth()
-
     const [seen, setSeen] = useState(false)
     const [user, setUser] = useOutletContext()
 
@@ -29,7 +27,7 @@ export function Profile() {
                     
                 </div>
                 <div className="mt-[-15%]">
-                    <img src={picLink} className='shadow m-4 rounded-full border-black border-4 object-cover w-32 h-32'></img>
+                    <img src={picLink} alt='profile pic' className='shadow m-4 rounded-full border-black border-4 object-cover w-32 h-32'></img>
                     <div className="">
                         <button onClick={handleSubmit} className='relative py-1 px-3 mr-5 mt-[-8%] text-sm float-right font-bold shadow bg-transparent border-[1px] border-white/50 rounded-full hover:bg-white/[0.1] duration-150'>Edit profile</button>
                     </div>

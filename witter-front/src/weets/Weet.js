@@ -8,7 +8,7 @@ import { Reweet } from './Reweet'
 import { CommentFeed } from '../comments/CommentFeed'
 
 export function Weet(props) {
-    const { id, content, username, user_id, image, first_name, last_name, profile_picture, time, parent, reload, setReload} = props
+    const { id, content, username, user_id, image, first_name, last_name, profile_picture, time, parent, reload, setReload, reweetPopup} = props
     const domain = process.env.REACT_APP_BACKEND_DOMAIN
     const profPic = process.env.REACT_APP_MEDIA_DOMAIN + profile_picture
     let navigate = useNavigate();
@@ -126,6 +126,10 @@ export function Weet(props) {
         setReweeted(!reweeted)
         setReload(!reload)
     }
+
+    function toggleReweetPopup() {
+        reweetPopup()
+    }
     
     async function handleDig(e) {
         e.stopPropagation()
@@ -201,7 +205,7 @@ export function Weet(props) {
                         </div>
                     </div>
                     <div className = 'flex grow text-[13px] justify-center items-end mb-3'>
-                        <div onClick={handleReweet} className='flex p-1 h-[50%]'>
+                        <div onClick={toggleReweetPopup} className='flex p-1 h-[50%]'>
                             {reweeted && <span className='text-purple-300'><IonIcon icon='reweet' size='small'/></span>}
                             {reweeted && <span className='ml-2 mb-1 text-purple-300'>{reweetCount}</span>}
                             {!reweeted && <span className=''><IonIcon icon='reweet' size='small'/></span>}

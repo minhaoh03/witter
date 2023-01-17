@@ -3,7 +3,6 @@ import { LoginUser } from './LoginUser'
 import { LogoutUser } from './LogoutUser'
 import { JoinUser } from './JoinUser'
 import { Profile } from './Profile'
-import { EditProfilePopup } from './EditProfPopup'
 import { UserPage } from './UserPage'
 
 export {
@@ -12,6 +11,5 @@ export {
     LogoutUser,
     JoinUser,
     Profile,
-    EditProfilePopup,
     UserPage,
 }

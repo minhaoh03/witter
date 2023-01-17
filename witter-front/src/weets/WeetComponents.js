@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { CreateWeet } from "./create"
-import { WeetList } from "./list"
+import { CreateWeet } from "./CreateWeet"
+import { WeetList } from "./WeetList"
 import { useOutletContext } from "react-router-dom";
 
 export function WeetFeed() {

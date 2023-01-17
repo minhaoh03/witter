@@ -58,12 +58,12 @@ export function CreateWeet(props) {
                         ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
                     </textarea>
                 </div>
-                <div className='w-full h-full py-3'>
-                    <div className='flex ml-20 justify-start h-full'>
+                <div className='grid grid-cols-8 grid-rows-1 w-full h-full py-3'>
+                    <div className='col-span-7 grid grid-cols-8 w-full h-full'>
                         <input id='image' accept="image/jpeg,image/png" type='file' className='h-0 overflow-hidden'/>
-                        <span className='text-gray-300' onClick={chooseImage}><IonIcon icon='image'/></span>
+                        <span className='text-gray-300 cursor-pointer ml-3' onClick={chooseImage}><IonIcon icon='image'/></span>
                     </div>
-                    <button onClick={handleSubmit} className="bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] float-right mr-5 self-center justify-self-center hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
+                    <button onClick={handleSubmit} className="col-start-8 bg-yellow-300 text-white text-sm font-bold rounded-full h-[32px] w-[64px] float-right mr-5 hover:bg-yellow-400 duration-50" type='submit'> Weet </button>
                 </div>
                 
             </div>

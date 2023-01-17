@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { lookup } from "../backendLookup"
 
 export function EditProfilePopup(props) {
@@ -39,7 +39,7 @@ export function EditProfilePopup(props) {
     }
 
     return (
-        <div className='absolute w-[100%] h-full ml-[-30%] bg-white/25 z-20 text-white'>
+        <div className='absolute w-full h-full ml-[-30%] bg-white/25 z-20 text-white'>
             <div className='relative ml-[35%] mt-[7%] rounded-xl bg-black w-[30%] h-[65vh] overflow-y-scroll overflow-x-hidden'>
                 <div className='sticky top-0 rounded-t-xl bg-black/75 h-[6vh] w-full border-b-[1px] border-gray-400/[0.5] pb-2'>
                     <button onClick={handleClick} className="relative ml-[2%] mt-[2vh]">X</button>
@@ -49,7 +49,7 @@ export function EditProfilePopup(props) {
                 <div className="flex flex-col mx-[5%] w-[90%]">
                     <div className='flex flex-col self-center h-full w-full'>
                         <input id='profpicinput' accept="image/jpeg,image/png" type='file' className='h-0 overflow-hidden'/>
-                        <img src={props.picLink} onClick={chooseFile} className="cursor-pointer self-center shadow m-3 rounded-full border-black border-4 object-cover w-32 h-32 filter hover:brightness-90"/>
+                        <img src={props.picLink} onClick={chooseFile} alt='profile pic change' className="cursor-pointer self-center shadow m-3 rounded-full border-black border-4 object-cover w-32 h-32 filter hover:brightness-90"/>
                     </div>
                     <div id='email' className='mb-2'>
                         <span className='absolute text-xs mt-1 ml-2 text-gray-500'>Email</span>
