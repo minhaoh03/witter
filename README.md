@@ -3,7 +3,7 @@
 **Images are a bit blurry due to scaling of the screenshots, please click
 the images and view them if you want to see the actual representation!**
 
-Landing Page of Witter
+## Landing Page of Witter
 
 ![Landing Page](/readmeImages/landingPage.png "Landing Page")
 
@@ -12,7 +12,7 @@ or login accounts
 
 
 ---------------------------------------------------------------------------
-Feed Page
+## Feed Page
 
 
 ![Feed Page](/readmeImages/feedPage.png "Feed")
@@ -22,7 +22,7 @@ Users can comment, like, and retweet tweets they find interesting
 
 
 ---------------------------------------------------------------------------
-Feed Page with Retweet
+## Feed Page with Retweet
 
 ![Feed with Retweet Page](/readmeImages/feedPage_2.png "Feed w. Retweet")
 
@@ -30,7 +30,7 @@ Example image for what a retweet would look like on the feed
 
 
 ---------------------------------------------------------------------------
-Comment Page
+## Comment Page
 
 ![Comment Page](/readmeImages/commentPage.png "Comments")
 
@@ -40,7 +40,7 @@ other comments to create a comment chain
 
 
 ---------------------------------------------------------------------------
-Profile Page
+## Profile Page
 
 ![Profile Page](/readmeImages/profilePage.png "Profile")
 
@@ -49,7 +49,7 @@ profiles and check other users' profiles
 
 
 ---------------------------------------------------------------------------
-Profile Edit Popup
+## Profile Edit Popup
 
 ![Profile Edit Page](/readmeImages/profileEditPage.png "Profile Editing")
 
@@ -58,7 +58,7 @@ accounts
 
 
 ---------------------------------------------------------------------------
-Register Page
+## Register Page
 
 ![Register Page](/readmeImages/registerPage.png "Register")
 
@@ -67,7 +67,7 @@ be used to register new accounts
 
 
 ---------------------------------------------------------------------------
-Login Page
+## Login Page
 ![Login Page](/readmeImages/loginPage.png "Login")
 
 Page for users to authenticate themselves and login to their accounts
