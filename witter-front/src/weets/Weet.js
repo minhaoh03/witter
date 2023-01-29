@@ -205,7 +205,7 @@ export function Weet(props) {
                         </div>
                     </div>
                     <div className = 'flex grow text-[13px] justify-center items-end mb-3'>
-                        <div onClick={toggleReweetPopup} className='flex p-1 h-[50%]'>
+                        <div onClick={handleReweet} className='flex p-1 h-[50%]'>
                             {reweeted && <span className='text-purple-300'><IonIcon icon='reweet' size='small'/></span>}
                             {reweeted && <span className='ml-2 mb-1 text-purple-300'>{reweetCount}</span>}
                             {!reweeted && <span className=''><IonIcon icon='reweet' size='small'/></span>}
