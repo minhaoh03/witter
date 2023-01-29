@@ -1,7 +1,7 @@
-import { checkAuth } from "../auth"
+import { checkAuth } from "../../auth"
 import { useOutletContext } from "react-router-dom"
 import { useState } from "react"
-import { EditProfilePopup } from "../popups"
+import { EditProfilePopup } from "../../popups"
 
 export function Profile() {
     const [seen, setSeen] = useState(false)

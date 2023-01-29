@@ -1,4 +1,4 @@
-import { IonIcon } from "../icons";
+import { IonIcon } from "../../icons";
 
 export function SearchBar() {
     return (

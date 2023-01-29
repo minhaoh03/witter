@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from "react-router-dom";
-import { lookup } from '../backendLookup';
-import { getCSRF } from '../auth';
-import { Logo } from '../logo';
+import { lookup } from '../../backendLookup';
+import { getCSRF } from '../../auth';
+import { Logo } from '../../logo';
 import { Link } from 'react-router-dom';
-import { AuthErrorPopup } from '../popups';
+import { AuthErrorPopup } from '../../popups';
 
 export function LoginUser() {
     const [username, setUsername] = useState('');

@@ -1,4 +1,4 @@
-import { IonIcon } from "../icons"
+import { IonIcon } from "../../icons"
 import { useNavigate } from "react-router-dom"
 
 export function JoinUser() {

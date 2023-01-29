@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import { lookup } from '../backendLookup'
-import { Logo } from '../logo'
+import { lookup } from '../../backendLookup'
+import { Logo } from '../../logo'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { AuthErrorPopup } from '../popups'
-import { getCSRF } from '../auth'
+import { AuthErrorPopup } from '../../popups'
+import { getCSRF } from '../../auth'
 
 
 export function CreateUser() {

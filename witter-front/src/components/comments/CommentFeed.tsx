@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { lookup } from "../backendLookup"
+import { lookup } from "../../backendLookup"
 import { Weet } from "../weets/Weet"
 
 export function CommentFeed(props) {

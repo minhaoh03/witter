@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { lookup } from '../backendLookup'
+import { lookup } from '../../backendLookup'
 
 export function Reweet(props) {
     const { child} = props

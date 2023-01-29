@@ -1,7 +1,7 @@
 import React, { useState, useEffect, } from 'react'
 
 import { Weet } from './Weet'
-import { lookup } from '../backendLookup'
+import { lookup } from '../../backendLookup'
 
 export function WeetList(props) {
   const {reweetPopup} = props

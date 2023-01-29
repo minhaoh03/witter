@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonIcon } from '../icons';
+import { IonIcon } from '../../icons';
 
 export function NavItem({ active, text, icon, }) {
     const bold = active ? 'font-bold' : 'font-normal'

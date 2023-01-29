@@ -1,5 +1,5 @@
 import { lookup } from "../backendLookup"
-import { checkAuth } from "./checkAuth"
+import { checkAuth } from "./checkAuth.ts"
 
 export async function getUser() {
     let auth = await checkAuth()

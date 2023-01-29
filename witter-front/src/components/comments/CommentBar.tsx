@@ -1,7 +1,7 @@
 import React from "react"
-import { lookup } from "../backendLookup"
+import { lookup } from "../../backendLookup"
 import { useOutletContext } from "react-router-dom"
-import { checkAuth } from "../auth"
+import { checkAuth } from "../../auth"
 
 export function CommentBar(props) {
     const {user, weet, replyingto, reload, setReload} = props

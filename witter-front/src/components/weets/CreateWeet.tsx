@@ -1,8 +1,8 @@
 
 import React from 'react'
-import { checkAuth } from '../auth';
-import { lookup } from '../backendLookup';
-import { IonIcon } from '../icons';
+import { checkAuth } from '../../auth';
+import { lookup } from '../../backendLookup';
+import { IonIcon } from '../../icons';
 
 export function CreateWeet(props) {
     const {user} = props
