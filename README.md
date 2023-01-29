@@ -1,5 +1,16 @@
 # witter
 
+Witter clone made using Django REST API backend and React.js frontend. 
+Data is stored using ORM in an SQLite database
+
+Future plans:
+ - Change Javascript code to Typescript
+ - Allow retweets to be quote retweets or just regular retweet
+ - Add discovery and hashtags for users to search a group of tweets by
+ - Integrate a document database to store data (Postgres etc.)
+ - Make media queries for responsiveness on all screen sizes
+
+
 **Images are a bit blurry due to scaling of the screenshots, please click
 the images and view them if you want to see the actual representation!**
 
