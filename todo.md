@@ -29,7 +29,7 @@
 [] Organize all code (DO THIS)
 #   [] Balance loading setStates
 [] Pagination
-[] Implement Postgre
+[] Implement Postgres
 [] Add pages for other tabs, bookmarking, messaging etc
 [] Tagging
 [] Social Bar
