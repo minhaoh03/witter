@@ -1,6 +1,12 @@
 import { ioniconMap as iconMap } from './ioniconsHelper'
 
-export function IonIcon(props) {
+interface IonIconProps {
+    icon: string,
+    size: string,
+    styles: string,
+}
+
+export function IonIcon(props: IonIconProps) {
     let {icon, size, styles} = props
     icon = iconMap[icon]
     return (

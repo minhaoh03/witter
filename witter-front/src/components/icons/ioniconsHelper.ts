@@ -1,4 +1,6 @@
-export const ioniconMap = {
+export const ioniconMap :{
+    [key: string]: string
+  } = {
     //Sidebar
     
     'bookmark': "bookmark-outline",

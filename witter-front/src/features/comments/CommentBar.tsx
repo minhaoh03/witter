@@ -1,23 +1,33 @@
 import React from "react"
-import { lookup } from "../../backendLookup"
+import { lookup } from "../"
 import { useOutletContext } from "react-router-dom"
 import { checkAuth } from "../../auth"
 
-export function CommentBar(props) {
-    const {user, weet, replyingto, reload, setReload} = props
-    const commentRef = React.createRef()
-    const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
+//CommentBar props typing
+interface CommentBarProps {
+    user: any,          //change
+    weet: any,
+    replyingto: string,
+    reload: boolean,
+    setReload: (arg0: boolean)=>void,
+}
 
-    const handleComment = async (e) => {
+export function CommentBar(props: CommentBarProps) {
+    const {user, weet, replyingto, reload, setReload} = props
+    const commentRef : React.RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(null)
+    const picLink : string = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
+
+    const handleComment = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        let auth = await checkAuth()
+        let auth : string[] = await checkAuth()
+
         await lookup(
             process.env.REACT_APP_BACKEND_DOMAIN,
             'weets/api/weets/',
             'post',
             {
                 parent: weet,
-                text: commentRef.current.value,
+                text: commentRef.current!.value,
                 user: user['id'], 
             },
             {
@@ -27,7 +37,7 @@ export function CommentBar(props) {
             },
             true
         )
-        commentRef.current.value = ''
+        commentRef.current!.value = ''
         setReload(!reload)
     }
 
@@ -37,7 +47,7 @@ export function CommentBar(props) {
                 <span className="ml-16 text-gray-500">Replying to </span><span className="text-yellow-300">@{replyingto}</span>
             </div>
             <div className="row-start-2 row-end-4 col-start-1 col-end-2">
-                <img src={picLink} className='shadow ml-2 rounded-full border-none object-cover w-12 h-12'></img>
+                <img src={picLink} alt='profile pic' className='shadow ml-2 rounded-full border-none object-cover w-12 h-12'></img>
             </div>
             <div className="flex row-start-2 row-end-4 col-start-2 col-end-9 ">
                 <textarea className="text-white outline-0 bg-black resize-none w-full overflow-visible" ref={commentRef} placeholder='Weet your reply'></textarea>

@@ -3,9 +3,9 @@ import { useNavigate, useOutletContext } from 'react-router-dom'
 import { IonIcon } from '../../icons/IonIcons'
 import { lookup } from '../../backendLookup'
 import { checkAuth, getUser } from '../../auth'
-import { CommentBar } from '../comments'
+import { CommentBar } from '../../features/comments'
 import { Reweet } from './Reweet'
-import { CommentFeed } from '../comments/CommentFeed'
+import { CommentFeed } from '../../features/comments/CommentFeed'
 
 export function Weet(props) {
     const { id, content, username, user_id, image, first_name, last_name, profile_picture, time, parent, reload, setReload, reweetPopup} = props
