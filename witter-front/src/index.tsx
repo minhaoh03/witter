@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { App } from './App'
 
-let root = ReactDOM.createRoot(document.getElementById('root'))
+const baseRoot = document.getElementById('root') as HTMLElement
+
+let root = ReactDOM.createRoot(baseRoot)
 root.render(
     <App/>
 );

@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import { IonIcon } from '../icons';
+import React from 'react'
 
-export function Logo(props) {
+interface LogoProps {
+    color: string,
+}
+
+export function Logo(props: LogoProps) {
     let {color} = props
     return (
         <Link

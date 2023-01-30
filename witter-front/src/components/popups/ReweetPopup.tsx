@@ -1,6 +1,10 @@
 import React from 'react'
 
-export function ReweetPopup(props) {
+interface ReweetPopupProps {
+    toggle: ()=>void
+}
+
+export function ReweetPopup(props: ReweetPopupProps) {
     const {toggle} = props
 
     return (
