@@ -1,50 +1,65 @@
+import React, {SyntheticEvent} from 'react'
+import { checkAuth } from '../../features/auth';
+import { lookup } from '../../utils/backendLookup';
+import { IonIcon } from '../icons';
 
-import React from 'react'
-import { checkAuth } from '../../auth';
-import { lookup } from '../../backendLookup';
-import { IonIcon } from '../../icons';
+interface CreateWeetProps {
+    user: any
+    create: (arg0: boolean) => void
+    created: boolean
+}
 
-export function CreateWeet(props) {
-    const {user} = props
-    const textAreaRef = React.createRef()
-    const domain = process.env.REACT_APP_BACKEND_DOMAIN
+export function CreateWeet(props: CreateWeetProps) {
+    const {user, create, created} = props
 
-    const picLink = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
+    const textAreaRef = React.useRef<HTMLTextAreaElement>(null)
+
+    const domain : string | undefined = process.env.REACT_APP_BACKEND_DOMAIN
+
+    const picLink : string = process.env.REACT_APP_MEDIA_DOMAIN + user['profile_picture']
+    const imageInput = document.getElementById('image') as HTMLInputElement
 
     // Creating new weet submission
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        var textAreaVal = textAreaRef.current.value
+    const handleSubmit = async (e: SyntheticEvent) => {
+        e.preventDefault()
+
+        var textAreaVal = textAreaRef.current!.value
         
         const finishCreate = () => {
-            props.create(!props.created)
-            textAreaRef.current.value = ''
+            create(!created)
+            textAreaRef.current!.value = ''
         }
         
         let auth = await checkAuth()
 
         let data = new FormData()
-        if(document.getElementById('image').files[0])
-            data.append('image', document.getElementById('image').files[0], 'image.png')
-        data.append('text', textAreaVal)
-        data.append('privacy', 'public')
+
+        const createFormData = (): void => {
+            if(imageInput.files![0])
+                data.append('image', imageInput.files![0], 'image.png')
+            data.append('text', textAreaVal)
+            data.append('privacy', 'public')
+        }
+        createFormData()
+        
 
         await lookup(
-            domain, 
+            domain!, 
             'weets/api/weets/', 
             'post', 
             data,
             {
-                'Authorization' : auth[0],
-                "X-CSRFToken": auth[1],
+                'Authorization' : auth[0]!,
+                "X-CSRFToken": auth[1]!,
             }, 
+            false
         )
         finishCreate()
     }
 
-    const chooseImage = (event) => {
-        event.preventDefault()
-        document.getElementById("image").click();
+    const chooseImage = (e: SyntheticEvent) => {
+        e.preventDefault()
+        imageInput.click();
     }
 
 
@@ -54,8 +69,7 @@ export function CreateWeet(props) {
                 <div className='flex'>
                     <span className='ml-2'><img src={picLink} className='shadow m-1 rounded-full border-none object-cover w-12 h-12' alt='profile pic'></img></span>
                     <textarea className='
-                            block ml-2 p-2.5 w-[90%] overflow-auto outline-none resize-none placeholder-gray-500 text-lg bg-black text-gray-300'
-                        ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
+                            block ml-2 p-2.5 w-[90%] overflow-auto outline-none resize-none placeholder-gray-500 text-lg bg-black text-gray-300' ref={textAreaRef} required={true} name='weet' placeholder='What&#8217;s happening?'>
                     </textarea>
                 </div>
                 <div className='grid grid-cols-8 grid-rows-1 w-full h-full py-3'>

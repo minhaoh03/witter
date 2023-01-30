@@ -11,7 +11,8 @@ interface EditProfilePopupProps {
 export function EditProfilePopup(props: EditProfilePopupProps) {
     let { toggle, user, picLink } = props
 
-    const [emailRef, fnameRef, lnameRef, bioRef, bdayRef] = new Array(5).fill(React.useRef<HTMLInputElement>(null))
+    const [emailRef, fnameRef, lnameRef, bdayRef] = new Array(4).fill(React.useRef<HTMLInputElement>(null))
+    const bioRef = React.useRef<HTMLTextAreaElement>(null)
 
     let newProfilePictureInput = document.getElementById('profpicinput') as HTMLInputElement
 
@@ -35,12 +36,12 @@ export function EditProfilePopup(props: EditProfilePopupProps) {
         createFormData()
         
         await lookup(
-            process.env.REACT_APP_BACKEND_DOMAIN,
+            process.env.REACT_APP_BACKEND_DOMAIN!,
             `users/api/${user.id}/`,
             'patch',
             formData,
             {},
-            undefined,
+            false,
         )
         window.location.reload();
         props.toggle()

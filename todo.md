@@ -27,6 +27,8 @@
 [] Have individual feeds, follow, and unfollow
 
 [] Organize all code (DO THIS)
+    [] Icons might have some problems
+    [] 
 #   [] Balance loading setStates
 [] Pagination
 [] Implement Postgres
